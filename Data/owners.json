@@ -1,8 +1,22 @@
 [
     {
-        "id": null,
-        "email": "erivas@makingsense.com",
-        "password": "3210",
-        "name": "Emanuel"
+        "id": 1,
+        "email": "manu_1019@hotmail.com",
+        "password": "dd",
+        "name": "Emanuel",
+        "pets": [
+            {
+                "name": "pepe",
+                "type": "grande"
+            },
+            {
+                "name": "Emanuel",
+                "type": "chico"
+            },
+            {
+                "name": "TestProject",
+                "type": "mediano"
+            }
+        ]
     }
 ]

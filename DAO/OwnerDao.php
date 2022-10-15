@@ -3,6 +3,7 @@
 
     use DAO\IOwnerDAO as IOwnerDAO;
     use Models\Owner as Owner;
+    use Models\Pet as Pet;
 
     class OwnerDAO implements IOwnerDAO
     {
@@ -42,6 +43,21 @@
             return $owner;
         }
 
+        public function AddPet($user)
+        {
+            $this->RetrieveData();
+            $petArray = $user->getPets();
+
+            foreach($this->ownerList as $owner)
+            {
+                if($owner->getId() == $user->getId())
+                {
+                    $owner->setPets($petArray);
+                }
+            }
+            $this->SaveData();
+        }
+
         private function GetOwner($id)
         {
             $this->RetrieveData();
@@ -65,6 +81,14 @@
                 $valuesArray["email"] = $owner->getEmail();
                 $valuesArray["password"] = $owner->getPassword();
                 $valuesArray["name"] = $owner->getName();
+                $valuesArray["pets"] = array();
+
+                foreach($owner->getPets() as $pet)
+                {
+                    $valuesPetArray["name"] = $pet->getName();
+                    $valuesPetArray["type"] = $pet->getType();
+                    array_push($valuesArray["pets"], $valuesPetArray);
+                }
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -78,6 +102,7 @@
         {
             $this->ownerList = array();
             $arrayToDecode = array();
+            $petList = array();
 
             if(file_exists('Data/owners.json'))
             {
@@ -93,11 +118,18 @@
                     $owner->setPassword($valuesArray["password"]);
                     $owner->setName($valuesArray["name"]);
 
+                    foreach($valuesArray["pets"] as $item)
+                    {
+                        $pet = new Pet();
+                        $pet->setName($item["name"]);
+                        $pet->setType($item["type"]);
+
+                        array_push($petList, $pet);
+                    }
+                    $owner->setPets($petList);
                     array_push($this->ownerList, $owner);
                 }
             }
-
-            $this->SaveData();
         }
     }
 ?>

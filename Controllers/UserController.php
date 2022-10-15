@@ -6,6 +6,7 @@
     use Exception;
     use Models\Owner as Owner;
     use Models\Keeper as Keeper;
+    use Models\Pet as Pet;
 
     class UserController
     {
@@ -30,6 +31,41 @@
             require_once(VIEWS_PATH."presentation.php");
         }
 
+        public function ShowOwnerLogin()
+        {
+            require_once(VIEWS_PATH."OwnerLogin.php");
+        }
+
+        public function ShowKeeperLogin()
+        {
+            require_once(VIEWS_PATH."KeeperLogin.php");
+        }
+
+        public function ShowOwnerHome()
+        {
+            require_once(VIEWS_PATH."OwnerHome.php");
+        }
+
+        public function ShowKeeperHome()
+        {
+            require_once(VIEWS_PATH."KeeperHome.php");
+        }
+
+        public function ShowPetList()
+        {
+            require_once(VIEWS_PATH."PetList.php");
+        }
+
+        public function ShowAddPet()
+        {
+            require_once(VIEWS_PATH."AddPet.php");
+        }
+
+        public function ShowKeeperList()
+        {
+            require_once(VIEWS_PATH."KeeperList.php");
+        }
+
         // ---------------------------------- POST -------------------------------------- //
 
         public function AddUser($email, $password, $name, $isKeeper)
@@ -37,6 +73,7 @@
             if($isKeeper == 0)
             {
                 $user = new Owner();
+                $user->setPets = array();
             }
             else
             {
@@ -54,10 +91,59 @@
             else
             {
                 $this->keeperDao->Add($user);
-                $this->ownerDao->Add($user);
             }
             
             $this->ShowHome();
+        }
+
+        public function OwnerLogin ($email, $password)
+        {
+            $data = $this->ownerDao->GetAll();
+
+            foreach($data as $user)
+            {
+                if($user->getPassword() == $password && $user->getEmail() == $email)
+                {
+                    $_SESSION["user"] = $user;
+                    header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
+                }
+            }
+        }
+
+        public function KeeperLogin ($email, $password)
+        {
+            $data = $this->keeperDao->GetAll();
+
+            foreach($data as $user)
+            {
+                if($user->getPassword() == $password && $user->getEmail() == $email)
+                {
+                    $_SESSION["user"] = $user;
+                    header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
+                }
+            }
+        }
+
+        public function AddPet($name, $type)
+        {
+            $user = $_SESSION["user"];
+
+            $pet = new Pet();
+            $pet->setName($name);
+            $pet->setType($type);
+
+            $arr = $user->getPets();
+            array_push($arr, $pet);
+            $user->setPets($arr);
+
+            $this->ownerDao->AddPet($user);
+            header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
+        }
+
+        public function Logout()
+        {
+            session_destroy();
+            header("location:" .FRONT_ROOT . "Home/Index");
         }
     }
 ?>

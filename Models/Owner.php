@@ -9,6 +9,7 @@
         private $email;
         private $password;
         private $name;
+        private $pets;
         
         public function getId()
         {
@@ -54,7 +55,17 @@
         public function setName($name)
         {
             $this->name = $name;
+            return $this;
+        }
 
+        public function getPets()
+        {
+            return $this->pets;
+        }
+
+        public function setPets($pets)
+        {
+            $this->pets = $pets;
             return $this;
         }
     }

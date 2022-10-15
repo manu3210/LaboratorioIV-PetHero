@@ -31,15 +31,14 @@
                          <div class="col-lg-4">
                               <div class="form-group">
                                    <fieldset>
-                                        <legend>Registrarse tambien como keeper</legend>
                                         <div>
                                              <input type="radio" id="contactChoice1"
-                                             name="isKeeper" value="1">
-                                             <label for="contactChoice1">Si!</label>
-
+                                             name="isKeeper" value="0" checked>
+                                             <label for="contactChoice1" >Registrarse como owner</label>
+                                             <br>
                                              <input type="radio" id="contactChoice2"
-                                             name="isKeeper" value="phone">
-                                             <label for="contactChoice2">No</label>
+                                             name="isKeeper" value="1" >
+                                             <label for="contactChoice2">Registrarse como keeper</label>
                                         </div>
                                    </fieldset>
                               </div>

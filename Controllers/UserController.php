@@ -63,6 +63,7 @@
 
         public function ShowKeeperList()
         {
+            $keeperList = $this->keeperDao->getAll();
             require_once(VIEWS_PATH."KeeperList.php");
         }
 

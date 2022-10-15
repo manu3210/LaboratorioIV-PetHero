@@ -16,9 +16,9 @@
                         <li class="list-group-item"><?php echo $user->getEmail(); ?></li>
                     </ul>
                     <div class="card-body">
-                        <a href="<?php echo FRONT_ROOT ?>Company/ShowKeeperList" class="card-link">Ver Keepers</a>
+                        <a href="<?php echo FRONT_ROOT ?>User/ShowKeeperList" class="card-link">Ver Keepers</a>
                         <a href="<?php echo FRONT_ROOT ?>User/ShowPetList" class="card-link">Mis mascotas</a>
-                        <a href="<?php echo FRONT_ROOT ?>JobOffer/ShowJobOfferByCompany/<?php echo $user->getId(); ?>" class="card-link">Mis reservas</a>
+                        <a href="<?php echo FRONT_ROOT ?>User/ShowPetList" class="card-link">Mis reservas</a>
                     </div>
                 </div>
             </div>

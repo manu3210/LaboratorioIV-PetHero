@@ -85,6 +85,7 @@
 
                 foreach($owner->getPets() as $pet)
                 {
+                    $valuesPetArray["id"] = $pet->getId();
                     $valuesPetArray["name"] = $pet->getName();
                     $valuesPetArray["type"] = $pet->getType();
                     array_push($valuesArray["pets"], $valuesPetArray);
@@ -121,6 +122,7 @@
                     foreach($valuesArray["pets"] as $item)
                     {
                         $pet = new Pet();
+                        $pet->setId($item["id"]);
                         $pet->setName($item["name"]);
                         $pet->setType($item["type"]);
 
@@ -130,6 +132,46 @@
                     array_push($this->ownerList, $owner);
                 }
             }
+        }
+
+        public function GetAllPets()
+        {
+            $petList = array();
+
+            foreach($this->ownerList as $owner)
+            {
+                foreach($owner->getPets() as $pet)
+                {
+                    array_push($petList, $pet);
+                }
+            }
+            return $petList;
+        }
+
+        public function GetPetById($id)
+        {
+            $owner = $_SESSION["user"];
+
+            foreach($owner->getPets() as $pet)
+            {
+                if($pet->getId() == $id)
+                {
+                    return $pet;
+                }
+            }
+        }
+
+        public function EditPet($id, $name, $type)
+        {
+            foreach($_SESSION["user"]->getPets() as $pet)
+            {
+                if($pet->getId() == $id)
+                {
+                    $pet->setName($name);
+                    $pet->setType($type);
+                }
+            }
+            $this->SaveData();
         }
     }
 ?>

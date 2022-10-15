@@ -18,6 +18,7 @@
                     <thead>
                          <th>Nombre</th>
                          <th>tamaño</th>
+                         <th></th>
                     </thead>
                     <tbody>
                          <?php
@@ -27,6 +28,7 @@
                                         <tr>
                                              <td><?php echo $pet->getName(); ?></td>
                                              <td><?php echo $pet->getType(); ?></td>
+                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>User/ShowEditPet/<?php echo $pet->getId(); ?>"><i class="far fa-edit text-dark"></i></a></td>
                                         </tr>
                                    <?php
                               }

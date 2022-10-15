@@ -61,11 +61,19 @@
             require_once(VIEWS_PATH."AddPet.php");
         }
 
+        public function ShowEditPet($id)
+        {
+            $pet = $this->ownerDao->GetPetById($id);
+            require_once(VIEWS_PATH."EditPet.php");
+        }
+
         public function ShowKeeperList()
         {
             $keeperList = $this->keeperDao->getAll();
             require_once(VIEWS_PATH."KeeperList.php");
         }
+
+
 
         // ---------------------------------- POST -------------------------------------- //
 
@@ -139,6 +147,12 @@
 
             $this->ownerDao->AddPet($user);
             header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
+        }
+
+        public function EditPet($id, $name, $type)
+        {
+            $this->ownerDao->EditPet($id, $name, $type);
+            header("location:" .FRONT_ROOT . "User/ShowPetList");
         }
 
         public function Logout()

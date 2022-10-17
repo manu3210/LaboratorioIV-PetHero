@@ -10,8 +10,9 @@
         private $type;
         private $urlPhoto;
         private $urlVideo;
-        private $urlvaccination;
+        private $urlVaccination;
         private $details;
+        private $breed;
         
         public function getId()
         {
@@ -69,14 +70,14 @@
             return $this;
         }
 
-        public function getUrlvaccination()
+        public function getUrlVaccination()
         {
-            return $this->urlVideo;
+            return $this->urlVaccination;
         }
 
-        public function setUrlvaccination($urlvaccination)
+        public function setUrlVaccination($urlVaccination)
         {
-            $this->urlvaccination = $urlvaccination;
+            $this->urlVaccination = $urlVaccination;
             return $this;
         }
 
@@ -88,6 +89,17 @@
         public function setDetails($details)
         {
             $this->details = $details;
+            return $this;
+        }
+
+        public function getBreed()
+        {
+            return $this->breed;
+        }
+
+        public function setbreed($breed)
+        {
+            $this->breed = $breed;
             return $this;
         }
     }

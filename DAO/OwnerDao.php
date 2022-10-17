@@ -97,8 +97,9 @@
                         $valuesPetArray["type"] = $pet->getType();
                         $valuesPetArray["urlPhoto"] = $pet->getUrlPhoto();
                         $valuesPetArray["urlVideo"] = $pet->getUrlVideo();
-                        $valuesPetArray["urlvaccination"] = $pet->getUrlvaccination();
+                        $valuesPetArray["urlVaccination"] = $pet->getUrlVaccination();
                         $valuesPetArray["details"] = $pet->getDetails();
+                        $valuesPetArray["breed"] = $pet->getBreed();
                         array_push($valuesArray["pets"], $valuesPetArray);
                     }
                 }
@@ -141,8 +142,9 @@
                         $pet->setType($item["type"]);
                         $pet->setUrlPhoto($item["urlPhoto"]);
                         $pet->setUrlVideo($item["urlVideo"]);
-                        $pet->setUrlVaccination($item["urlvaccination"]);
+                        $pet->setUrlVaccination($item["urlVaccination"]);
                         $pet->setDetails($item["details"]);
+                        $pet->setBreed($item["breed"]);
 
                         array_push($petList, $pet);
                     }
@@ -179,7 +181,7 @@
             }
         }
 
-        public function EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $details)
+        public function EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $breed, $details)
         {
             $this->RetrieveData();
 
@@ -197,7 +199,33 @@
                             $pet->setUrlVideo($urlVideo);
                             $pet->setUrlVaccination($urlVaccination);
                             $pet->setDetails($details);
+                            $pet->setBreed($breed);
                         }
+                    }
+                }
+            }
+            $this->SaveData();
+        }
+
+        public function DeletePet($id)
+        {
+            $this->RetrieveData();
+            $petList = array();
+            $index = 0;
+
+            foreach($this->ownerList as $owner)
+            {
+                if($owner->getId() == $_SESSION["user"]->getId())
+                {
+                    $petList = $owner->getPets();
+                    foreach($petList as $pet)
+                    {
+                        if($pet->getId() == $id)
+                        {
+                            unset($petList[$index]);
+                            $owner->setPets($petList);
+                        }
+                        $index++;
                     }
                 }
             }

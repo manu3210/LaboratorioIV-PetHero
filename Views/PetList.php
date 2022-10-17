@@ -14,7 +14,10 @@
                <table class="table bg-dark-alpha">
                     <thead>
                          <th>Nombre</th>
+                         <th>Raza</th>
                          <th>tamaño</th>
+                         <th></th>
+                         <th></th>
                          <th></th>
                     </thead>
                     <tbody>
@@ -24,8 +27,11 @@
                                    ?>
                                         <tr>
                                              <td><?php echo $pet->getName(); ?></td>
+                                             <td><?php echo $pet->getBreed(); ?></td>
                                              <td><?php echo $pet->getType(); ?></td>
                                              <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>User/ShowEditPet/<?php echo $pet->getId(); ?>"><i class="far fa-edit text-dark"></i></a></td>
+                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>User/ShowPetProfile/<?php echo $pet->getId(); ?>"><i class="fas fa-file-alt"></i></a></td>
+                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>User/DeletePet/<?php echo $pet->getId(); ?>"><i class="fas fa-trash-alt"></i></a></td>
                                         </tr>
                                    <?php
                               }

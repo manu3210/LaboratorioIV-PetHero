@@ -39,14 +39,23 @@
                     <div class="row">
                         <div class="col-lg-4">
                               <div class="form-group">
-                                   <label for="">Url foto plan de vacunacion</label>
-                                   <input type="text" name="urlvaccination" value="<?php echo $pet->getUrlVaccination(); ?>" class="form-control" required>
+                                   <label for="">Url foto de plan de vacunacion</label>
+                                   <input type="text" name="urlvaccination" value="" class="form-control" required>
                               </div>
                          </div>
                          <div class="col-lg-4">
                               <div class="form-group">
+                                   <label for="">Raza</label>
+                                   <input type="text" name="breed" value="" class="form-control" required>
+                              </div>
+                         </div>
+                         
+                    </div>
+                    <div class="row">
+                         <div class="col-lg-4">
+                              <div class="form-group">
                                    <label for="">Detalles adicionales</label>
-                                   <textarea name="details" rows="4" cols="33"><?php echo $pet->getDetails(); ?></textarea>
+                                   <textarea id="w3review" name="w3review" rows="4" cols="71"></textarea>
                               </div>
                          </div>
                     </div>

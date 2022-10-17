@@ -83,12 +83,24 @@
             require_once(VIEWS_PATH."EditPet.php");
         }
 
+        public function ShowPetProfile($id)
+        {
+            $users = $this->ownerDao->Getall();
+            foreach($users as $user)
+            {
+                if($user->getId() == $_SESSION["user"]->getId())
+                {
+                    $pet = $this->ownerDao->GetPetById($id);
+                }
+            }
+            require_once(VIEWS_PATH."PetProfile.php");
+        }
+
         public function ShowKeeperList()
         {
             $keeperList = $this->keeperDao->getAll();
             require_once(VIEWS_PATH."KeeperList.php");
         }
-
 
 
         // ---------------------------------- POST -------------------------------------- //
@@ -152,7 +164,7 @@
             }
         }
 
-        public function AddPet($name, $type, $urlPhoto, $urlVideo, $urlVaccination, $details)
+        public function AddPet($name, $type, $urlPhoto, $urlVideo, $urlVaccination, $breed,  $details)
         {
             $user = $_SESSION["user"];
 
@@ -163,6 +175,7 @@
             $pet->setUrlVideo($urlVideo);
             $pet->setUrlVaccination($urlVaccination);
             $pet->setDetails($details);
+            $pet->setBreed($breed);
 
             $arr = $user->getPets();
             array_push($arr, $pet);
@@ -172,9 +185,15 @@
             header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
         }
 
-        public function EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $details)
+        public function EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $breed, $details)
         {
-            $this->ownerDao->EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $details);
+            $this->ownerDao->EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $breed, $details);
+            header("location:" .FRONT_ROOT . "User/ShowPetList");
+        }
+
+        public function DeletePet($id)
+        {
+            $this->ownerDao->DeletePet($id);
             header("location:" .FRONT_ROOT . "User/ShowPetList");
         }
 

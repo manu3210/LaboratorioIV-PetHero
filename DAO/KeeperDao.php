@@ -64,7 +64,10 @@
                 $valuesArray["id"] = $keeper->getId();
                 $valuesArray["email"] = $keeper->getEmail();
                 $valuesArray["password"] = $keeper->getPassword();
-                $valuesArray["name"] = $keeper->getName();
+                $valuesArray["firstName"] = $keeper->getFirstName();
+                $valuesArray["lastName"] = $keeper->getLastName();
+                $valuesArray["phone"] = $keeper->getPhone();
+                $valuesArray["adress"] = $keeper->getAdress();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -91,7 +94,10 @@
                     $keeper->setId($valuesArray["id"]);
                     $keeper->setEmail($valuesArray["email"]);
                     $keeper->setPassword($valuesArray["password"]);
-                    $keeper->setName($valuesArray["name"]);
+                    $keeper->setFirstName($valuesArray["firstName"]);
+                    $keeper->setLastName($valuesArray["lastName"]);
+                    $keeper->setPhone($valuesArray["phone"]);
+                    $keeper->setAdress($valuesArray["adress"]);
 
                     array_push($this->keeperList, $keeper);
                 }

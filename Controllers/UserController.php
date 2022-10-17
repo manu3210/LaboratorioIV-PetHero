@@ -53,6 +53,15 @@
 
         public function ShowPetList()
         {
+            $users = $this->ownerDao->Getall();
+            foreach($users as $user)
+            {
+                if($user->getId() == $_SESSION["user"]->getId())
+                {
+                    $petList = $user->getPets();
+                }
+            }
+
             require_once(VIEWS_PATH."PetList.php");
         }
 
@@ -63,7 +72,14 @@
 
         public function ShowEditPet($id)
         {
-            $pet = $this->ownerDao->GetPetById($id);
+            $users = $this->ownerDao->Getall();
+            foreach($users as $user)
+            {
+                if($user->getId() == $_SESSION["user"]->getId())
+                {
+                    $pet = $this->ownerDao->GetPetById($id);
+                }
+            }
             require_once(VIEWS_PATH."EditPet.php");
         }
 
@@ -77,7 +93,7 @@
 
         // ---------------------------------- POST -------------------------------------- //
 
-        public function AddUser($email, $password, $name, $isKeeper)
+        public function AddUser($email, $password, $firstName, $lastName, $phone, $adress, $isKeeper)
         {
             if($isKeeper == 0)
             {
@@ -91,7 +107,10 @@
             
             $user->setEmail($email);
             $user->setPassword($password);
-            $user->setName($name);
+            $user->setFirstName($firstName);
+            $user->setLastName($lastName);
+            $user->setPhone($phone);
+            $user->setAdress($adress);
 
             if($isKeeper == 0)
             {
@@ -133,13 +152,17 @@
             }
         }
 
-        public function AddPet($name, $type)
+        public function AddPet($name, $type, $urlPhoto, $urlVideo, $urlVaccination, $details)
         {
             $user = $_SESSION["user"];
 
             $pet = new Pet();
             $pet->setName($name);
             $pet->setType($type);
+            $pet->setUrlPhoto($urlPhoto);
+            $pet->setUrlVideo($urlVideo);
+            $pet->setUrlVaccination($urlVaccination);
+            $pet->setDetails($details);
 
             $arr = $user->getPets();
             array_push($arr, $pet);
@@ -149,9 +172,9 @@
             header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
         }
 
-        public function EditPet($id, $name, $type)
+        public function EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $details)
         {
-            $this->ownerDao->EditPet($id, $name, $type);
+            $this->ownerDao->EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $details);
             header("location:" .FRONT_ROOT . "User/ShowPetList");
         }
 

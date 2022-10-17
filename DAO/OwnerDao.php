@@ -27,7 +27,7 @@
         
         public function GetById ($id) 
         {
-            return GetOwner($id);
+            return $this->GetOwner($id);
         }
         
         public function Update($owner)
@@ -75,22 +75,33 @@
         {
             $arrayToEncode = array();
 
+
+
             foreach($this->ownerList as $owner)
             {
                 $valuesArray["id"] = $owner->getId();
                 $valuesArray["email"] = $owner->getEmail();
                 $valuesArray["password"] = $owner->getPassword();
-                $valuesArray["name"] = $owner->getName();
+                $valuesArray["firstName"] = $owner->getFirstName();
+                $valuesArray["lastName"] = $owner->getLastName();
+                $valuesArray["phone"] = $owner->getPhone();
+                $valuesArray["adress"] = $owner->getAdress();
                 $valuesArray["pets"] = array();
 
-                foreach($owner->getPets() as $pet)
+                if($owner->getPets() != null)
                 {
-                    $valuesPetArray["id"] = $pet->getId();
-                    $valuesPetArray["name"] = $pet->getName();
-                    $valuesPetArray["type"] = $pet->getType();
-                    array_push($valuesArray["pets"], $valuesPetArray);
+                    foreach($owner->getPets() as $pet)
+                    {
+                        $valuesPetArray["id"] = $pet->getId();
+                        $valuesPetArray["name"] = $pet->getName();
+                        $valuesPetArray["type"] = $pet->getType();
+                        $valuesPetArray["urlPhoto"] = $pet->getUrlPhoto();
+                        $valuesPetArray["urlVideo"] = $pet->getUrlVideo();
+                        $valuesPetArray["urlvaccination"] = $pet->getUrlvaccination();
+                        $valuesPetArray["details"] = $pet->getDetails();
+                        array_push($valuesArray["pets"], $valuesPetArray);
+                    }
                 }
-
                 array_push($arrayToEncode, $valuesArray);
             }
 
@@ -117,7 +128,10 @@
                     $owner->setId($valuesArray["id"]);
                     $owner->setEmail($valuesArray["email"]);
                     $owner->setPassword($valuesArray["password"]);
-                    $owner->setName($valuesArray["name"]);
+                    $owner->setFirstName($valuesArray["firstName"]);
+                    $owner->setLastName($valuesArray["lastName"]);
+                    $owner->setPhone($valuesArray["phone"]);
+                    $owner->setAdress($valuesArray["adress"]);
 
                     foreach($valuesArray["pets"] as $item)
                     {
@@ -125,6 +139,10 @@
                         $pet->setId($item["id"]);
                         $pet->setName($item["name"]);
                         $pet->setType($item["type"]);
+                        $pet->setUrlPhoto($item["urlPhoto"]);
+                        $pet->setUrlVideo($item["urlVideo"]);
+                        $pet->setUrlVaccination($item["urlvaccination"]);
+                        $pet->setDetails($item["details"]);
 
                         array_push($petList, $pet);
                     }
@@ -150,7 +168,7 @@
 
         public function GetPetById($id)
         {
-            $owner = $_SESSION["user"];
+            $owner = $this->GetById($_SESSION["user"]->getId());
 
             foreach($owner->getPets() as $pet)
             {
@@ -161,14 +179,26 @@
             }
         }
 
-        public function EditPet($id, $name, $type)
+        public function EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $details)
         {
-            foreach($_SESSION["user"]->getPets() as $pet)
+            $this->RetrieveData();
+
+            foreach($this->ownerList as $owner)
             {
-                if($pet->getId() == $id)
+                if($owner->getId() == $_SESSION["user"]->getId())
                 {
-                    $pet->setName($name);
-                    $pet->setType($type);
+                    foreach($owner->getPets() as $pet)
+                    {
+                        if($pet->getId() == $id)
+                        {
+                            $pet->setName($name);
+                            $pet->setType($type);
+                            $pet->setUrlPhoto($urlPhoto);
+                            $pet->setUrlVideo($urlVideo);
+                            $pet->setUrlVaccination($urlVaccination);
+                            $pet->setDetails($details);
+                        }
+                    }
                 }
             }
             $this->SaveData();

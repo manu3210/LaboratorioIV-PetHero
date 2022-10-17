@@ -25,10 +25,32 @@
                         <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Nombre</label>
-                                   <input type="text" name="name" value="" class="form-control" required>
+                                   <input type="text" name="firstName" value="" class="form-control" required>
                               </div>
                          </div>
                          <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Apellido</label>
+                                   <input type="text" name="lastName" value="" class="form-control" required>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Telefono</label>
+                                   <input type="text" name="phone" value="" class="form-control" required>
+                              </div>
+                         </div>
+                         <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Direccion</label>
+                                   <input type="text" name="adress" value="" class="form-control" required>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-lg-4">
                               <div class="form-group">
                                    <fieldset>
                                         <div>

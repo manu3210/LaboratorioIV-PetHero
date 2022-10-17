@@ -1,8 +1,5 @@
 <?php
     require_once('nav.php');
-
-    $petList = $_SESSION["user"]->getPets();
-
 ?>
 
 <main class="py-5">

@@ -2,7 +2,7 @@
 
     namespace Models;
 
-    class Keeper extends Owner
+    class Keeper extends User
     {
         
     }

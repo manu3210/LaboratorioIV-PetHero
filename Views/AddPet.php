@@ -21,6 +21,34 @@
                               </div>
                          </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Url foto de perfil</label>
+                                   <input type="text" name="urlPhoto" value="" class="form-control" required>
+                              </div>
+                         </div>
+                         <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Url video</label>
+                                   <input type="text" name="urlVideo" value="" class="form-control" required>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Url foto de plan de vacunacion</label>
+                                   <input type="text" name="urlvaccination" value="" class="form-control" required>
+                              </div>
+                         </div>
+                         <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Detalles adicionales</label>
+                                   <textarea id="w3review" name="w3review" rows="4" cols="33"></textarea>
+                              </div>
+                         </div>
+                    </div>
                     <button type="submit" class="btn btn-dark ml-auto d-block">Agregar</button>
                </form>
           </div>

@@ -22,6 +22,34 @@
                               </div>
                          </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Url foto de perfil</label>
+                                   <input type="text" name="urlPhoto" value="<?php echo $pet->getUrlPhoto(); ?>" class="form-control" required>
+                              </div>
+                         </div>
+                         <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Url video</label>
+                                   <input type="text" name="urlVideo" value="<?php echo $pet->getUrlVideo(); ?>" class="form-control" required>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Url foto plan de vacunacion</label>
+                                   <input type="text" name="urlvaccination" value="<?php echo $pet->getUrlVaccination(); ?>" class="form-control" required>
+                              </div>
+                         </div>
+                         <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Detalles adicionales</label>
+                                   <textarea name="details" rows="4" cols="33"><?php echo $pet->getDetails(); ?></textarea>
+                              </div>
+                         </div>
+                    </div>
                     <button type="submit" class="btn btn-dark ml-auto d-block">Agregar</button>
                </form>
           </div>

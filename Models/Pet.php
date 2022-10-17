@@ -8,6 +8,10 @@
         private $id;
         private $name;
         private $type;
+        private $urlPhoto;
+        private $urlVideo;
+        private $urlvaccination;
+        private $details;
         
         public function getId()
         {
@@ -40,6 +44,50 @@
         public function setType($type)
         {
             $this->type = $type;
+            return $this;
+        }
+
+        public function getUrlPhoto()
+        {
+            return $this->urlPhoto;
+        }
+
+        public function setUrlPhoto($urlPhoto)
+        {
+            $this->urlPhoto = $urlPhoto;
+            return $this;
+        }
+
+        public function getUrlVideo()
+        {
+            return $this->urlVideo;
+        }
+
+        public function setUrlVideo($urlVideo)
+        {
+            $this->urlVideo = $urlVideo;
+            return $this;
+        }
+
+        public function getUrlvaccination()
+        {
+            return $this->urlVideo;
+        }
+
+        public function setUrlvaccination($urlvaccination)
+        {
+            $this->urlvaccination = $urlvaccination;
+            return $this;
+        }
+
+        public function getDetails()
+        {
+            return $this->details;
+        }
+
+        public function setDetails($details)
+        {
+            $this->details = $details;
             return $this;
         }
     }

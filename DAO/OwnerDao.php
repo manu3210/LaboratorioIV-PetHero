@@ -58,6 +58,25 @@
             $this->SaveData();
         }
 
+        public function EditUser($id, $email, $password, $firstName, $lastName, $phone, $adress)
+        {
+            $this->RetrieveData();
+
+            foreach($this->ownerList as $owner)
+            {
+                if($owner->getId() == $id)
+                {
+                    $owner->setEmail($email);
+                    $owner->setPassword($password);
+                    $owner->setFirstName($firstName);
+                    $owner->setLastName($lastName);
+                    $owner->setPhone($phone);
+                    $owner->setAdress($adress);
+                }
+            }
+            $this->SaveData();
+        }
+
         private function GetOwner($id)
         {
             $this->RetrieveData();
@@ -70,12 +89,10 @@
                 }
             }
         }
-        
+
         private function SaveData()
         {
             $arrayToEncode = array();
-
-
 
             foreach($this->ownerList as $owner)
             {

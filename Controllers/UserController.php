@@ -43,12 +43,33 @@
 
         public function ShowOwnerHome()
         {
+            $users = $this->ownerDao->Getall();
+            foreach($users as $item)
+            {
+                if($item->getId() == $_SESSION["user"]->getId())
+                {
+                    $_SESSION["user"] = $item;
+                }
+            }
             require_once(VIEWS_PATH."OwnerHome.php");
         }
 
         public function ShowKeeperHome()
         {
+            $users = $this->keeperDao->Getall();
+            foreach($users as $item)
+            {
+                if($item->getId() == $_SESSION["user"]->getId())
+                {
+                    $_SESSION["user"] = $item;
+                }
+            }
             require_once(VIEWS_PATH."KeeperHome.php");
+        }
+
+        public function ShowEditProfile()
+        {
+            require_once(VIEWS_PATH."EditUser.php");
         }
 
         public function ShowPetList()
@@ -100,6 +121,11 @@
         {
             $keeperList = $this->keeperDao->getAll();
             require_once(VIEWS_PATH."KeeperList.php");
+        }
+
+        public function ShowEditAvailability()
+        {
+            require_once(VIEWS_PATH."EditAvailability.php");
         }
 
 
@@ -161,6 +187,21 @@
                     $_SESSION["user"] = $user;
                     header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
                 }
+            }
+        }
+
+        public function EditUser($id, $email, $password, $firstName, $lastName, $phone, $adress)
+        {
+            
+            if(get_class($_SESSION["user"]) == "Models\Owner")
+            {
+                $this->ownerDao->EditUser($id, $email, $password, $firstName, $lastName, $phone, $adress);
+                header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
+            }
+            else
+            {
+                $this->keeperDao->EditUser($id, $email, $password, $firstName, $lastName, $phone, $adress);
+                header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
             }
         }
 

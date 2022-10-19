@@ -41,10 +41,11 @@
                </table>
                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="<?php echo FRONT_ROOT ?>User/ShowOwnerHome/"class="btn btn-primary me-md-2" type="button">Volver</a>
+                    <a href="<?php echo FRONT_ROOT ?>User/ShowAddPet"class="btn btn-primary me-md-2" type="button">Agregar mascota</a>
                </div>
           </div>
      </section>
 </main>
 
 
-<a href="<?php echo FRONT_ROOT ?>User/ShowAddPet"><h1>Agregar mascota</h1></a>
+<a href="<?php echo FRONT_ROOT ?>User/ShowAddPet"><h1></h1></a>

@@ -1,1 +1,11 @@
-[]
+[
+    {
+        "id": null,
+        "email": "erivas@makingsense.com",
+        "password": "3210",
+        "firstName": "Emanuel",
+        "lastName": "Rivas",
+        "phone": "4562683",
+        "adress": "Rivadavia 7902"
+    }
+]

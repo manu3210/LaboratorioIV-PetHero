@@ -29,18 +29,25 @@
             return GetKeeper($id);
         }
         
-        public function Update($keeper)
+        public function EditUser($id, $email, $password, $firstName, $lastName, $phone, $adress)
         {
-            $toUpdate = $this->GetKeeper($keeper->getId());
+            $this->RetrieveData();
 
-            $toUpdate->setEmail($keeper->getEmail());
-            $toUpdate->setPassword($keeper->getPassword());
-            $toUpdate->setName($keeper->getName());
-
+            foreach($this->keeperList as $keeper)
+            {
+                if($keeper->getId() == $id)
+                {
+                    $keeper->setEmail($email);
+                    $keeper->setPassword($password);
+                    $keeper->setFirstName($firstName);
+                    $keeper->setLastName($lastName);
+                    $keeper->setPhone($phone);
+                    $keeper->setAdress($adress);
+                }
+            }
             $this->SaveData();
-
-            return $keeper;
         }
+
 
         private function GetKeeper($id)
         {

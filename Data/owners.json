@@ -39,7 +39,18 @@
         "lastName": "Rivas",
         "phone": "4562683",
         "adress": "Rivadavia 7902",
-        "pets": [],
+        "pets": [
+            {
+                "id": 1,
+                "name": "pepe",
+                "type": "Chico",
+                "urlPhoto": "",
+                "urlVideo": "",
+                "urlVaccination": "",
+                "details": "dddddddddd",
+                "breed": "Basset hound"
+            }
+        ],
         "isAdmin": false
     }
 ]

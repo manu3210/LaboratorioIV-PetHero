@@ -17,8 +17,8 @@
                          </div>
                          <div class="col-lg-4">
                               <div class="form-group">
-                                   <label for="">Tipo</label>
-                                   <input type="text" name="type" value="<?php echo $pet->getType(); ?>" class="form-control" required>
+                                   <label for="">Raza</label>
+                                   <input type="text" name="breed" value="<?php echo $pet->getBreed(); ?>" class="form-control" required>
                               </div>
                          </div>
                     </div>
@@ -26,13 +26,13 @@
                         <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Url foto de perfil</label>
-                                   <input type="text" name="urlPhoto" value="<?php echo $pet->getUrlPhoto(); ?>" class="form-control" required>
+                                   <input type="text" name="urlPhoto" value="<?php echo $pet->getUrlPhoto(); ?>" class="form-control">
                               </div>
                          </div>
                          <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Url video</label>
-                                   <input type="text" name="urlVideo" value="<?php echo $pet->getUrlVideo(); ?>" class="form-control" required>
+                                   <input type="text" name="urlVideo" value="<?php echo $pet->getUrlVideo(); ?>" class="form-control">
                               </div>
                          </div>
                     </div>
@@ -40,13 +40,17 @@
                         <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Url foto de plan de vacunacion</label>
-                                   <input type="text" name="urlvaccination" value="<?php echo $pet->getUrlVaccination(); ?>" class="form-control" required>
+                                   <input type="text" name="urlvaccination" value="<?php echo $pet->getUrlVaccination(); ?>" class="form-control">
                               </div>
                          </div>
-                         <div class="col-lg-4">
+                         <div class="col-lg-4" style="margin-top: 35px">
                               <div class="form-group">
-                                   <label for="">Raza</label>
-                                   <input type="text" name="breed" value="<?php echo $pet->getBreed(); ?>" class="form-control" required>
+                                   <label for="">Tipo</label>
+                                   <select name="cars" id="cars">
+                                        <?php foreach($petTypeList as $petType){ ?>
+                                             <option value="<?php echo $petType->getSize(); ?>"><?php echo $petType->getSize(); ?></option>
+                                        <?php } ?>
+                                   </select>
                               </div>
                          </div>
                          

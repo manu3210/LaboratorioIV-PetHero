@@ -3,20 +3,24 @@
 
     use DAO\OwnerDAO as OwnerDAO;
     use DAO\KeeperDao as KeeperDao;
+    use DAO\PetTypeDao as PetTypeDao;
     use Exception;
     use Models\Owner as Owner;
     use Models\Keeper as Keeper;
     use Models\Pet as Pet;
+    use Models\PetType as PetType;
 
     class UserController
     {
         private $ownerDao;
         private $keeperDao;
+        private $petTypeDao;
 
         public function __construct()
         {
             $this->ownerDao = new OwnerDao();
             $this->keeperDao = new KeeperDao();
+            $this->petTypeDao = new PetTypeDao();
         }
 
         // ----------------------------------- GET ------------------------------------ //
@@ -88,12 +92,14 @@
 
         public function ShowAddPet()
         {
+            $petTypeList = $this->petTypeDao->GetAll();
             require_once(VIEWS_PATH."AddPet.php");
         }
 
         public function ShowEditPet($id)
         {
             $users = $this->ownerDao->Getall();
+            $petTypeList = $this->petTypeDao->GetAll();
             foreach($users as $user)
             {
                 if($user->getId() == $_SESSION["user"]->getId())
@@ -205,7 +211,7 @@
             }
         }
 
-        public function AddPet($name, $type, $urlPhoto, $urlVideo, $urlVaccination, $breed,  $details)
+        public function AddPet($name, $breed, $urlPhoto, $urlVideo, $urlVaccination, $type,  $details)
         {
             $user = $_SESSION["user"];
 
@@ -230,7 +236,7 @@
             header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
         }
 
-        public function EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $breed, $details)
+        public function EditPet($id, $name, $breed, $urlPhoto, $urlVideo, $urlVaccination, $type, $details)
         {
             $this->ownerDao->EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $breed, $details);
             header("location:" .FRONT_ROOT . "User/ShowPetList");

@@ -16,8 +16,8 @@
                          </div>
                          <div class="col-lg-4">
                               <div class="form-group">
-                                   <label for="">Tipo</label>
-                                   <input type="text" name="type" value="" class="form-control" required>
+                                   <label for="">Raza</label>
+                                   <input type="text" name="breed" value="" class="form-control" required>
                               </div>
                          </div>
                     </div>
@@ -42,10 +42,14 @@
                                    <input type="text" name="urlvaccination" value="" class="form-control">
                               </div>
                          </div>
-                         <div class="col-lg-4">
+                         <div class="col-lg-4" style="margin-top: 35px">
                               <div class="form-group">
-                                   <label for="">Raza</label>
-                                   <input type="text" name="breed" value="" class="form-control" required>
+                                   <label for="">Tipo</label>
+                                   <select name="cars" id="cars">
+                                        <?php foreach($petTypeList as $petType){ ?>
+                                             <option value="<?php echo $petType->getSize(); ?>"><?php echo $petType->getSize(); ?></option>
+                                        <?php } ?>
+                                   </select>
                               </div>
                          </div>
                          

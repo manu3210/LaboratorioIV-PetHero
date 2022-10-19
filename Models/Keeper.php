@@ -20,7 +20,7 @@
 
         public function getAvailabilityTo()
         {
-            return $this->availabilityv;
+            return $this->availabilityTo;
         }
 
         public function setAvailabilityTo($availabilityTo)

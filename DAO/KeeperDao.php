@@ -11,7 +11,10 @@
         public function Add(Keeper $keeper)
         {
             $this->RetrieveData();
-            
+            $last = end($this->keeperList);
+            $id = ($last != false) ? $last->getId() : 0;
+            $id++;
+            $keeper->setId($id);
             array_push($this->keeperList, $keeper);
 
             $this->SaveData();
@@ -48,6 +51,21 @@
             $this->SaveData();
         }
 
+        public function EditAvailability($id, $availabilityFrom, $availabilityTo)
+        {
+            $this->RetrieveData();
+
+            foreach($this->keeperList as $keeper)
+            {
+                if($keeper->getId() == $id)
+                {
+                    $keeper->setavailabilityFrom($availabilityFrom);
+                    $keeper->setavailabilityTo($availabilityTo);
+                }
+            }
+            $this->SaveData();
+        }
+
 
         private function GetKeeper($id)
         {
@@ -75,6 +93,8 @@
                 $valuesArray["lastName"] = $keeper->getLastName();
                 $valuesArray["phone"] = $keeper->getPhone();
                 $valuesArray["adress"] = $keeper->getAdress();
+                $valuesArray["availabilityFrom"] = $keeper->getAvailabilityFrom();
+                $valuesArray["availabilityTo"] = $keeper->getAvailabilityTo();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -105,6 +125,8 @@
                     $keeper->setLastName($valuesArray["lastName"]);
                     $keeper->setPhone($valuesArray["phone"]);
                     $keeper->setAdress($valuesArray["adress"]);
+                    $keeper->setAvailabilityFrom($valuesArray["availabilityFrom"]);
+                    $keeper->setAvailabilityTo($valuesArray["availabilityTo"]);
 
                     array_push($this->keeperList, $keeper);
                 }

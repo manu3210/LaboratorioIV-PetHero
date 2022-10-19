@@ -12,7 +12,10 @@
         public function Add(Owner $owner)
         {
             $this->RetrieveData();
-            
+            $last = end($this->ownerList);
+            $id = ($last != false) ? $last->getId() : 0;
+            $id++;
+            $owner->setId($id);
             array_push($this->ownerList, $owner);
 
             $this->SaveData();
@@ -166,6 +169,7 @@
                         array_push($petList, $pet);
                     }
                     $owner->setPets($petList);
+                    $petList = array();
                     array_push($this->ownerList, $owner);
                 }
             }

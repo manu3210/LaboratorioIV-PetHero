@@ -25,13 +25,13 @@
                         <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Url foto de perfil</label>
-                                   <input type="text" name="urlPhoto" value="" class="form-control" required>
+                                   <input type="text" name="urlPhoto" value="" class="form-control">
                               </div>
                          </div>
                          <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Url video</label>
-                                   <input type="text" name="urlVideo" value="" class="form-control" required>
+                                   <input type="text" name="urlVideo" value="" class="form-control">
                               </div>
                          </div>
                     </div>
@@ -39,7 +39,7 @@
                         <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Url foto de plan de vacunacion</label>
-                                   <input type="text" name="urlvaccination" value="" class="form-control" required>
+                                   <input type="text" name="urlvaccination" value="" class="form-control">
                               </div>
                          </div>
                          <div class="col-lg-4">

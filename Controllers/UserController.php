@@ -219,6 +219,10 @@
             $pet->setBreed($breed);
 
             $arr = $user->getPets();
+            $last = end($arr);
+            $id = ($last != false) ? $last->getId() : 0;
+            $id++;
+            $pet->setId($id);
             array_push($arr, $pet);
             $user->setPets($arr);
 
@@ -236,6 +240,12 @@
         {
             $this->ownerDao->DeletePet($id);
             header("location:" .FRONT_ROOT . "User/ShowPetList");
+        }
+
+        public function EditAvailability($id, $availabilityFrom, $availabilityTo)
+        {
+            $this->keeperDao->EditAvailability($id, $availabilityFrom, $availabilityTo);
+            header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
         }
 
         public function Logout()

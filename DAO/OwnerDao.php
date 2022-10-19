@@ -16,6 +16,15 @@
             $id = ($last != false) ? $last->getId() : 0;
             $id++;
             $owner->setId($id);
+
+            if($id == 1)
+            {
+                $owner->setIsAdmin(true);
+            }
+            else
+            {
+                $owner->setIsAdmin(false);
+            }
             array_push($this->ownerList, $owner);
 
             $this->SaveData();
@@ -107,6 +116,7 @@
                 $valuesArray["phone"] = $owner->getPhone();
                 $valuesArray["adress"] = $owner->getAdress();
                 $valuesArray["pets"] = array();
+                $valuesArray["isAdmin"] = $owner->getIsAdmin();
 
                 if($owner->getPets() != null)
                 {
@@ -153,6 +163,7 @@
                     $owner->setLastName($valuesArray["lastName"]);
                     $owner->setPhone($valuesArray["phone"]);
                     $owner->setAdress($valuesArray["adress"]);
+                    $owner->setIsAdmin($valuesArray["isAdmin"]);
 
                     foreach($valuesArray["pets"] as $item)
                     {

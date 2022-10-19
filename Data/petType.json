@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "size": "Grande"
+    },
+    {
+        "id": 2,
+        "size": "Mediano"
+    },
+    {
+        "id": 3,
+        "size": "Chico"
+    }
+]

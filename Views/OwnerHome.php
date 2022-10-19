@@ -22,6 +22,9 @@
                         <a href="<?php echo FRONT_ROOT ?>User/ShowPetList" class="card-link">Mis mascotas</a>
                         <a href="#" class="card-link">Mis reservas</a>
                         <a href="<?php echo FRONT_ROOT ?>User/ShowEditProfile" class="card-link">Editar perfil</a>
+                        <?php if($user->getIsAdmin() == true){ ?>
+                            <a href="<?php echo FRONT_ROOT ?>PetType/ShowSetPetTypes" class="card-link">Agregar tipos de mascota</a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

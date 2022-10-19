@@ -5,7 +5,7 @@
         "password": "3210",
         "firstName": "Emanuel",
         "lastName": "Rivas",
-        "phone": "4781316",
+        "phone": "4562683",
         "adress": "Rivadavia 7902",
         "pets": [
             {
@@ -28,7 +28,8 @@
                 "details": "orejas",
                 "breed": "Basset hound"
             }
-        ]
+        ],
+        "isAdmin": true
     },
     {
         "id": 2,
@@ -38,6 +39,7 @@
         "lastName": "Rivas",
         "phone": "4562683",
         "adress": "Rivadavia 7902",
-        "pets": []
+        "pets": [],
+        "isAdmin": false
     }
 ]

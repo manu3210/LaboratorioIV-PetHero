@@ -16,6 +16,10 @@
                         <li class="list-group-item"> Email: <?php echo $user->getEmail(); ?></li>
                         <li class="list-group-item"> Telefono: <?php echo $user->getPhone(); ?></li>
                         <li class="list-group-item"> Direccion: <?php echo $user->getAdress(); ?></li>
+                        <li class="list-group-item"> Tamaño de mascota permitido: <?php echo $user->getPetSize(); ?></li>
+                        <li class="list-group-item"> Precio por dia: <?php echo $user->getPrice(); ?></li>
+                        <li class="list-group-item"> Disponible desde: <?php echo $user->getAvailabilityFrom(); ?></li>
+                        <li class="list-group-item"> Disponible hasta: <?php echo $user->getAvailabilityTo(); ?></li>
                     </ul>
                     <div class="card-body">
                         <a href="<?php echo FRONT_ROOT ?>User/ShowEditAvailability" class="card-link">Cambiar disponibilidad</a>

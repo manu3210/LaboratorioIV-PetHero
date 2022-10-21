@@ -131,6 +131,7 @@
 
         public function ShowEditAvailability()
         {
+            $petTypeList = $this->petTypeDao->GetAll();
             require_once(VIEWS_PATH."EditAvailability.php");
         }
 
@@ -211,6 +212,12 @@
             }
         }
 
+        public function EditAvailability($id, $availabilityFrom, $availabilityTo, $price, $size)
+        {
+            $this->keeperDao->EditAvailability($id, $availabilityFrom, $availabilityTo, $price, $size);
+            header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
+        }
+
         public function AddPet($name, $breed, $urlPhoto, $urlVideo, $urlVaccination, $type,  $details)
         {
             $user = $_SESSION["user"];
@@ -246,12 +253,6 @@
         {
             $this->ownerDao->DeletePet($id);
             header("location:" .FRONT_ROOT . "User/ShowPetList");
-        }
-
-        public function EditAvailability($id, $availabilityFrom, $availabilityTo)
-        {
-            $this->keeperDao->EditAvailability($id, $availabilityFrom, $availabilityTo);
-            header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
         }
 
         public function Logout()

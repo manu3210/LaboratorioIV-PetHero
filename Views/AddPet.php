@@ -45,7 +45,7 @@
                          <div class="col-lg-4" style="margin-top: 35px">
                               <div class="form-group">
                                    <label for="">Tipo</label>
-                                   <select name="cars" id="cars">
+                                   <select name="type">
                                         <?php foreach($petTypeList as $petType){ ?>
                                              <option value="<?php echo $petType->getSize(); ?>"><?php echo $petType->getSize(); ?></option>
                                         <?php } ?>

@@ -14,19 +14,32 @@
                <table class="table bg-dark-alpha">
                     <thead>
                          <th>Nombre</th>
-                         <th>tamaño</th>
+                         <th>Apellido</th>
+                         <th>Email</th>
+                         <th>Tamaño de mascota maximo</th>
+                         <th>Precio por dia</th>
+                         <th>Disponible desde</th>
+                         <th>Disponible hasta</th>
+                         <th>Reservar</th>
                     </thead>
                     <tbody>
                          <?php
                               foreach($keeperList as $keeper)
                               {
+                                   if($keeper->getAvailabilityFrom() != null){
                                    ?>
                                         <tr>
-                                             <td><?php echo $keeper->getName(); ?></td>
+                                             <td><?php echo $keeper->getFirstName(); ?></td>
+                                             <td><?php echo $keeper->getLastName(); ?></td>
                                              <td><?php echo $keeper->getEmail(); ?></td>
+                                             <td><?php echo $keeper->getPetSize(); ?></td>
+                                             <td><?php echo $keeper->getPrice(); ?></td>
+                                             <td><?php echo $keeper->getAvailabilityFrom(); ?></td>
+                                             <td><?php echo $keeper->getAvailabilityTo(); ?></td>
+                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>#<?php echo $keeper->getId(); ?>"><i class="fas fa-business-time"></i></a></td>
                                         </tr>
                                    <?php
-                              }
+                              }}
                          ?>
                          </tr>
                     </tbody>

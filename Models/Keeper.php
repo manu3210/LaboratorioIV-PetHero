@@ -6,6 +6,8 @@
     {
         private $availabilityFrom;
         private $availabilityTo;
+        private $petSize;
+        private $price;
 
         public function getAvailabilityFrom()
         {
@@ -28,5 +30,27 @@
             $this->availabilityTo = $availabilityTo;
             return $this;
         }
+        public function getPetSize()
+        {
+            return $this->petSize;
+        }
+
+        public function setPetSize($petSize)
+        {
+            $this->petSize = $petSize;
+            return $this;
+        }
+
+        public function getPrice()
+        {
+            return $this->price;
+        }
+
+        public function setPrice($price)
+        {
+            $this->price = $price;
+            return $this;
+        }
+
     }
 ?>

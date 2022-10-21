@@ -51,7 +51,7 @@
             $this->SaveData();
         }
 
-        public function EditAvailability($id, $availabilityFrom, $availabilityTo)
+        public function EditAvailability($id, $availabilityFrom, $availabilityTo, $price, $size)
         {
             $this->RetrieveData();
 
@@ -61,6 +61,8 @@
                 {
                     $keeper->setavailabilityFrom($availabilityFrom);
                     $keeper->setavailabilityTo($availabilityTo);
+                    $keeper->setPetSize($size);
+                    $keeper->setPrice($price);
                 }
             }
             $this->SaveData();
@@ -95,6 +97,8 @@
                 $valuesArray["adress"] = $keeper->getAdress();
                 $valuesArray["availabilityFrom"] = $keeper->getAvailabilityFrom();
                 $valuesArray["availabilityTo"] = $keeper->getAvailabilityTo();
+                $valuesArray["petSize"] = $keeper->getPetSize();
+                $valuesArray["price"] = $keeper->getPrice();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -127,6 +131,8 @@
                     $keeper->setAdress($valuesArray["adress"]);
                     $keeper->setAvailabilityFrom($valuesArray["availabilityFrom"]);
                     $keeper->setAvailabilityTo($valuesArray["availabilityTo"]);
+                    $keeper->setPetSize($valuesArray["petSize"]);
+                    $keeper->setPrice($valuesArray["price"]);
 
                     array_push($this->keeperList, $keeper);
                 }

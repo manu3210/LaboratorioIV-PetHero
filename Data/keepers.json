@@ -7,8 +7,10 @@
         "lastName": "Rivas",
         "phone": "4562683",
         "adress": "Rivadavia 7902",
-        "availabilityFrom": null,
-        "availabilityTo": null
+        "availabilityFrom": "2022-10-14",
+        "availabilityTo": "2022-10-31",
+        "petSize": "Chico",
+        "price": "1000"
     },
     {
         "id": 2,
@@ -19,6 +21,8 @@
         "phone": "4562683",
         "adress": "Rivadavia 7902",
         "availabilityFrom": null,
-        "availabilityTo": null
+        "availabilityTo": null,
+        "petSize": null,
+        "price": null
     }
 ]

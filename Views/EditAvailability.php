@@ -34,7 +34,7 @@
                                    <label for="">Tipo</label>
                                    <select name="type">
                                         <?php foreach($petTypeList as $petType){ ?>
-                                             <option value="<?php echo $petType->getSize(); ?>"><?php echo $petType->getSize(); ?></option>
+                                             <option value="<?php echo $petType->getId(); ?>"><?php echo $petType->getSize(); ?></option>
                                         <?php } ?>
                                    </select>
                               </div>

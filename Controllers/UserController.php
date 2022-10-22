@@ -9,6 +9,7 @@
     use Models\Keeper as Keeper;
     use Models\Pet as Pet;
     use Models\PetType as PetType;
+    use Models\User as User;
 
     class UserController
     {
@@ -76,26 +77,9 @@
             require_once(VIEWS_PATH."EditUser.php");
         }
 
-        
-
-        
-
-        public function ShowPetProfile($id)
-        {
-            $users = $this->ownerDao->Getall();
-            foreach($users as $user)
-            {
-                if($user->getId() == $_SESSION["user"]->getId())
-                {
-                    $pet = $this->ownerDao->GetPetById($id);
-                }
-            }
-            require_once(VIEWS_PATH."PetProfile.php");
-        }
-
         public function ShowKeeperList()
         {
-            $keeperList = $this->keeperDao->getAll();
+            $keeperList = $this->keeperDao->GetAll();
             require_once(VIEWS_PATH."KeeperList.php");
         }
 
@@ -169,22 +153,37 @@
 
         public function EditUser($id, $email, $password, $firstName, $lastName, $phone, $adress)
         {
-            
+            $user = new User();
+            $user->setId($id);
+            $user->setEmail($email);
+            $user->setPassword($password);
+            $user->setFirstName($firstName);
+            $user->setLastName($lastName);
+            $user->setPhone($phone);
+            $user->setAdress($adress);
+
             if(get_class($_SESSION["user"]) == "Models\Owner")
             {
-                $this->ownerDao->EditUser($id, $email, $password, $firstName, $lastName, $phone, $adress);
+                $this->ownerDao->EditUser($user);
                 header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
             }
             else
             {
-                $this->keeperDao->EditUser($id, $email, $password, $firstName, $lastName, $phone, $adress);
+                $this->keeperDao->EditUser($user);
                 header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
             }
         }
 
         public function EditAvailability($id, $availabilityFrom, $availabilityTo, $price, $size)
         {
-            $this->keeperDao->EditAvailability($id, $availabilityFrom, $availabilityTo, $price, $size);
+            $keeper = new Keeper();
+            $keeper->setId($id);
+            $keeper->setAvailabilityFrom($availabilityFrom);
+            $keeper->setAvailabilityTo($availabilityTo);
+            $keeper->setPrice($price);
+            $keeper->setPetSize($size);
+
+            $this->keeperDao->EditAvailability($keeper);
             header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
         }
 
@@ -214,12 +213,6 @@
         }
 
         
-
-        public function DeletePet($id)
-        {
-            $this->ownerDao->DeletePet($id);
-            header("location:" .FRONT_ROOT . "User/ShowPetList");
-        }
 
         public function Logout()
         {

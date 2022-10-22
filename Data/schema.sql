@@ -1,4 +1,3 @@
-
 CREATE DATABASE IF NOT EXISTS PetHero;
 USE PetHero;
 
@@ -25,10 +24,11 @@ CREATE TABLE IF NOT EXISTS keepers(
     adress VARCHAR(35) NOT NULL,
     availabilityFrom date,
     availabilityTo date,
-    petSize VARCHAR(35),
+    petTypeId INT,
     price float,
     
-    constraint `keeperId` primary key(keeperId)
+    constraint `keeperId` primary key(keeperId),
+    constraint petTypeId foreign key (petTypeId) references petTypes(petTypeId),
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS days(

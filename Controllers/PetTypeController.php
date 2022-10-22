@@ -22,7 +22,7 @@
             $petType = new PetType();
             $petType->setSize($size);
 
-            $this->petTypeDao->AddPetType($petType);
+            $this->petTypeDao->Add($petType);
             header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
         }
     }

@@ -121,6 +121,20 @@
                 throw $ex;
             }
         }
+
+        public function deletePet($petId)
+        {
+            try
+            {
+                $query  = "DELETE FROM " . $this->tableName . " WHERE petId =" . $petId;
+                $this->connection  = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $e)
+            {
+                throw $e;
+            }
+        }
     }
 
 ?>

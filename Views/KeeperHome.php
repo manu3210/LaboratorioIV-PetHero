@@ -22,7 +22,7 @@
                         <li class="list-group-item"> Disponible hasta: <?php echo $user->getAvailabilityTo(); ?></li>
                     </ul>
                     <div class="card-body">
-                        <a href="<?php echo FRONT_ROOT ?>User/ShowEditAvailability" class="card-link">Cambiar disponibilidad</a>
+                        <a href="<?php echo FRONT_ROOT ?>User/ShowEditAvailability" class="card-link">Cambiar parametros</a>
                         <a href="<?php echo FRONT_ROOT ?>User/ShowPetList" class="card-link">Mis reservas</a>
                         <a href="<?php echo FRONT_ROOT ?>User/ShowEditProfile" class="card-link">Editar perfil</a>
                     </div>

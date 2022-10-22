@@ -34,6 +34,12 @@
             require_once(VIEWS_PATH."EditPet.php");
         }
 
+        public function ShowPetProfile($id)
+        {
+            $pet = $this->petDao->GetById($id);
+            require_once(VIEWS_PATH."PetProfile.php");
+        }
+
         /*************************************** POST ***************************************************/
 
         public function AddPet($name, $breed, $urlPhoto, $urlVideo, $urlVaccination, $type, $details)
@@ -69,6 +75,12 @@
             $pet->setDetails($details);
 
             $this->petDao->EditPet($pet);
+            header("location:" .FRONT_ROOT . "Pet/ShowPetList");
+        }
+
+        public function DeletePet($id)
+        {
+            $this->petDao->DeletePet($id);
             header("location:" .FRONT_ROOT . "Pet/ShowPetList");
         }
 

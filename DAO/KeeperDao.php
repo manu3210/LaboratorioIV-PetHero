@@ -3,6 +3,7 @@
 
     use DAO\IKeeperDao as IKeeperDao;
     use Models\Keeper as Keeper;
+    use Models\User as User;
 
     class KeeperDao implements IKeeperDao
     {
@@ -32,13 +33,57 @@
             }
         }
 
+        public function EditUser(User $user)
+        {
+            try
+            {
+                $query  = "UPDATE " . $this->tableName 
+                . " SET email='" . $user->getEmail() 
+                . "', pass = '". $user->getPassword() 
+                . "', firstName = '". $user->getFirstName() 
+                . "', lastName = '". $user->getLastName() 
+                . "', phone = '". $user->getPhone() 
+                . "', adress = '". $user->getAdress() 
+                ."' where keeperId = " . $user->getId();
+                
+                $this->connection  = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $e)
+            {
+                throw $e;
+            }
+        }
+
+        public function EditAvailability(User $user)
+        {
+            try
+            {
+                $query  = "UPDATE " . $this->tableName 
+                . " SET availabilityFrom='" . $user->getAvailabilityFrom() 
+                . "', availabilityTo = '". $user->getAvailabilityTo() 
+                . "', price = '". $user->getPrice() 
+                . "', petTypeId = '". $user->getPetSize() 
+                ."' where keeperId = " . $user->getId();
+                
+                $this->connection  = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $e)
+            {
+                throw $e;
+            }
+        }
+
         public function GetAll()
         {
             try
             {
-                $userList = array();
+                $keeperList = array();
 
-                $query = "SELECT * FROM ".$this->tableName;
+                $query = "SELECT k.keeperId, k.email, k.firstName, k.lastName, k.phone, k.adress, k.pass, k.availabilityFrom, k.availabilityTo, t.size, k.price FROM "
+                .$this->tableName
+                ." k left join petTypes t on k.petTypeId = t.petTypeId";
 
                 $this->connection = Connection::GetInstance();
 
@@ -54,11 +99,15 @@
                     $user->setPhone($row["phone"]);
                     $user->setAdress($row["adress"]);
                     $user->setPassword($row["pass"]);
+                    $user->setAvailabilityFrom($row["availabilityFrom"]);
+                    $user->setAvailabilityTo($row["availabilityTo"]);
+                    $user->setPetSize($row["size"]);
+                    $user->setPrice($row["price"]);
 
-                    array_push($userList, $user);
+                    array_push($keeperList, $user);
                 }
 
-                return $userList;
+                return $keeperList;
             }
             catch(Exception $ex)
             {

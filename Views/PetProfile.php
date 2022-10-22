@@ -25,8 +25,8 @@
                         <?php }?>
                     </ul>
                     <div class="card-body">
-                        <a href="<?php echo FRONT_ROOT ?>User/ShowPetList/" class="card-link">Volver</a>
-                        <a href="<?php echo FRONT_ROOT ?>User/ShowEditPet/<?php echo $pet->getId(); ?>" class="card-link">Editar perfil</a>
+                        <a href="<?php echo FRONT_ROOT ?>Pet/ShowPetList/" class="card-link">Volver</a>
+                        <a href="<?php echo FRONT_ROOT ?>Pet/ShowEditPet/<?php echo $pet->getId(); ?>" class="card-link">Editar perfil</a>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@
     use DAO\IOwnerDAO as IOwnerDAO;
     use Models\Owner as Owner;
     use Models\Pet as Pet;
+    use Models\User as User;
     use DAO\Connection as Connection;
 
     class OwnerDAO implements IOwnerDAO
@@ -33,6 +34,28 @@
             }
         }
 
+        public function EditUser(User $user)
+        {
+            try
+            {
+                $query  = "UPDATE " . $this->tableName 
+                . " SET email='" . $user->getEmail() 
+                . "', pass = '". $user->getPassword() 
+                . "', firstName = '". $user->getFirstName() 
+                . "', lastName = '". $user->getLastName() 
+                . "', phone = '". $user->getPhone() 
+                . "', adress = '". $user->getAdress() 
+                ."' where ownerId = " . $user->getId();
+                
+                $this->connection  = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $e)
+            {
+                throw $e;
+            }
+        }
+
         public function GetAll()
         {
             try
@@ -55,6 +78,7 @@
                     $user->setPhone($row["phone"]);
                     $user->setAdress($row["adress"]);
                     $user->setPassword($row["pass"]);
+                    $user->setIsAdmin($row["isAdmin"]);
 
                     array_push($userList, $user);
                 }

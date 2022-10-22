@@ -30,8 +30,8 @@
                                              <td><?php echo $pet->getBreed(); ?></td>
                                              <td><?php echo $pet->getType(); ?></td>
                                              <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>Pet/ShowEditPet/<?php echo $pet->getId(); ?>"><i class="far fa-edit text-dark"></i></a></td>
-                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>User/ShowPetProfile/<?php echo $pet->getId(); ?>"><i class="fas fa-file-alt"></i></a></td>
-                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>User/DeletePet/<?php echo $pet->getId(); ?>"><i class="fas fa-trash-alt"></i></a></td>
+                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>Pet/ShowPetProfile/<?php echo $pet->getId(); ?>"><i class="fas fa-file-alt"></i></a></td>
+                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>Pet/DeletePet/<?php echo $pet->getId(); ?>"><i class="fas fa-trash-alt"></i></a></td>
                                         </tr>
                                    <?php
                               }

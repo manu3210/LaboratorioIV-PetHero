@@ -6,6 +6,5 @@
     interface IOwnerDAO
     {
         function Add(Owner $owner);
-        function GetAll();
     }
 ?>

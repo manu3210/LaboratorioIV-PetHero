@@ -29,7 +29,7 @@
                                              <td><?php echo $pet->getName(); ?></td>
                                              <td><?php echo $pet->getBreed(); ?></td>
                                              <td><?php echo $pet->getType(); ?></td>
-                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>User/ShowEditPet/<?php echo $pet->getId(); ?>"><i class="far fa-edit text-dark"></i></a></td>
+                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>Pet/ShowEditPet/<?php echo $pet->getId(); ?>"><i class="far fa-edit text-dark"></i></a></td>
                                              <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>User/ShowPetProfile/<?php echo $pet->getId(); ?>"><i class="fas fa-file-alt"></i></a></td>
                                              <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>User/DeletePet/<?php echo $pet->getId(); ?>"><i class="fas fa-trash-alt"></i></a></td>
                                         </tr>
@@ -41,7 +41,7 @@
                </table>
                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="<?php echo FRONT_ROOT ?>User/ShowOwnerHome/"class="btn btn-primary me-md-2" type="button">Volver</a>
-                    <a href="<?php echo FRONT_ROOT ?>User/ShowAddPet"class="btn btn-primary me-md-2" type="button">Agregar mascota</a>
+                    <a href="<?php echo FRONT_ROOT ?>Pet/ShowAddPet"class="btn btn-primary me-md-2" type="button">Agregar mascota</a>
                </div>
           </div>
      </section>

@@ -76,39 +76,9 @@
             require_once(VIEWS_PATH."EditUser.php");
         }
 
-        public function ShowPetList()
-        {
-            $users = $this->ownerDao->Getall();
-            foreach($users as $user)
-            {
-                if($user->getId() == $_SESSION["user"]->getId())
-                {
-                    $petList = $user->getPets();
-                }
-            }
+        
 
-            require_once(VIEWS_PATH."PetList.php");
-        }
-
-        public function ShowAddPet()
-        {
-            $petTypeList = $this->petTypeDao->GetAll();
-            require_once(VIEWS_PATH."AddPet.php");
-        }
-
-        public function ShowEditPet($id)
-        {
-            $users = $this->ownerDao->Getall();
-            $petTypeList = $this->petTypeDao->GetAll();
-            foreach($users as $user)
-            {
-                if($user->getId() == $_SESSION["user"]->getId())
-                {
-                    $pet = $this->ownerDao->GetPetById($id);
-                }
-            }
-            require_once(VIEWS_PATH."EditPet.php");
-        }
+        
 
         public function ShowPetProfile($id)
         {
@@ -243,11 +213,7 @@
             header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
         }
 
-        public function EditPet($id, $name, $breed, $urlPhoto, $urlVideo, $urlVaccination, $type, $details)
-        {
-            $this->ownerDao->EditPet($id, $name, $type, $urlPhoto, $urlVideo, $urlVaccination, $breed, $details);
-            header("location:" .FRONT_ROOT . "User/ShowPetList");
-        }
+        
 
         public function DeletePet($id)
         {

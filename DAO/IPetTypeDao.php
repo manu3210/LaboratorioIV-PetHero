@@ -5,6 +5,6 @@
 
     interface IPetTypeDAO
     {
-        function AddPetType(PetType $petType);
+        function Add(PetType $petType);
     }
 ?>

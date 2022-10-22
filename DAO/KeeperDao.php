@@ -6,8 +6,67 @@
 
     class KeeperDao implements IKeeperDao
     {
-        private $keeperList;
+        //private $keeperList;
 
+        private $connection;
+        private $tableName = "keepers";
+
+        public function Add(Keeper $keeper)
+        {
+            try
+            {
+                $query  = "INSERT INTO " . $this->tableName . "(email, pass, firstName, lastName, phone, adress) VALUES (:email, :pass, :firstName, :lastName, :phone, :adress);";
+                $parameters["email"] = $keeper->getEmail();
+                $parameters["pass"] = $keeper->getPassword();
+                $parameters["firstName"] = $keeper->getFirstName();
+                $parameters["lastName"] = $keeper->getLastName();
+                $parameters["phone"] = $keeper->getPhone();
+                $parameters["adress"] = $keeper->getAdress();
+                
+                $this->connection  = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $e)
+            {
+                throw $e;
+            }
+        }
+
+        public function GetAll()
+        {
+            try
+            {
+                $userList = array();
+
+                $query = "SELECT * FROM ".$this->tableName;
+
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+                
+                foreach ($result as $row)
+                {                
+                    $user = new keeper();
+                    $user->setId($row["keeperId"]);
+                    $user->setEmail($row["email"]);
+                    $user->setFirstName($row["firstName"]);
+                    $user->setLastName($row["lastName"]);
+                    $user->setPhone($row["phone"]);
+                    $user->setAdress($row["adress"]);
+                    $user->setPassword($row["pass"]);
+
+                    array_push($userList, $user);
+                }
+
+                return $userList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        /*
         public function Add(Keeper $keeper)
         {
             $this->RetrieveData();
@@ -140,5 +199,6 @@
 
             $this->SaveData();
         }
+        */
     }
 ?>

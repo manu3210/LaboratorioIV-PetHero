@@ -6,7 +6,7 @@
           <div class="container">
                <h2 class="mb-4">Edicion de mascota</h2>
                <hr>
-               <form action="<?php echo FRONT_ROOT ?>User/EditPet" method="post" class="bg-dark-alpha p-5">
+               <form action="<?php echo FRONT_ROOT ?>Pet/EditPet" method="post" class="bg-dark-alpha p-5">
                     <div class="row">
                         <div class="col-lg-4">
                               <div class="form-group">
@@ -48,7 +48,7 @@
                                    <label for="">Tipo</label>
                                    <select name="cars" id="cars">
                                         <?php foreach($petTypeList as $petType){ ?>
-                                             <option value="<?php echo $petType->getSize(); ?>"><?php echo $petType->getSize(); ?></option>
+                                             <option value="<?php echo $petType->getId(); ?>"><?php echo $petType->getSize(); ?></option>
                                         <?php } ?>
                                    </select>
                               </div>
@@ -64,7 +64,7 @@
                          </div>
                     </div>
                     <button type="submit" class="btn btn-primary ml-auto ">Agregar</button>
-                    <a href="<?php echo FRONT_ROOT ?>User/ShowPetList/"class="btn btn-primary me-md-2" type="button">Volver</a>
+                    <a href="<?php echo FRONT_ROOT ?>Pet/ShowPetList/"class="btn btn-primary me-md-2" type="button">Volver</a>
                </form>
           </div>
      </section>

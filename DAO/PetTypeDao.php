@@ -6,8 +6,56 @@
 
     class PetTypeDao implements IPetTypeDao
     {
-        private $petTypeList;
+        //private $petTypeList;
 
+        private $connection;
+        private $tableName = "petTypes";
+
+        public function Add(PetType $petType)
+        {
+            try
+            {
+                $query  = "INSERT INTO " . $this->tableName . "(size) VALUES (:size);";
+                $parameters["size"] = $petType->getSize();
+                
+                $this->connection  = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $e)
+            {
+                throw $e;
+            }
+        }
+
+        public function GetAll()
+        {
+            try
+            {
+                $petTypeList = array();
+                $query = "SELECT * FROM ".$this->tableName;
+                $this->connection = Connection::GetInstance();
+                $result = $this->connection->Execute($query);
+                
+                foreach ($result as $row)
+                {                
+                    $petType = new PetType();
+                    $petType->setId($row["petTypeId"]);
+                    $petType->setSize($row["size"]);
+                    array_push($petTypeList, $petType);
+                }
+                return $petTypeList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+
+
+        
+
+        /*
         public function AddPetType(PetType $petType)
         {
             $this->RetrieveData();
@@ -98,5 +146,6 @@
             }
             $this->SaveData();
         }
+        */
     }
 ?>

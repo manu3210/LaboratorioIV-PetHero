@@ -13,6 +13,7 @@
         private $urlVaccination;
         private $details;
         private $breed;
+        private $owner;
         
         public function getId()
         {
@@ -100,6 +101,17 @@
         public function setbreed($breed)
         {
             $this->breed = $breed;
+            return $this;
+        }
+
+        public function getOwner()
+        {
+            return $this->owner;
+        }
+
+        public function setOwner($owner)
+        {
+            $this->owner = $owner;
             return $this;
         }
     }

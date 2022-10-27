@@ -83,9 +83,5 @@
             $this->petDao->DeletePet($id);
             header("location:" .FRONT_ROOT . "Pet/ShowPetList");
         }
-
-        
-        
-
     }
 ?>

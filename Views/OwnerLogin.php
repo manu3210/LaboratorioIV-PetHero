@@ -15,6 +15,9 @@
                <div>
                <a href="<?php echo FRONT_ROOT ?>User/ShowKeeperLogin" >Click aca para ingresar como Keeper</a>
                </div>
+               <div>
+               <a href="<?php echo FRONT_ROOT ?>User/ShowSignUp" >Click aca para registrarse</a>
+               </div>
                <div style="color: red; text-align:center;">
                     <?php if(isset($_SESSION["msj"])){echo $_SESSION["msj"];session_destroy();} ?>
                </div>

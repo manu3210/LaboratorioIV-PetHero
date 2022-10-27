@@ -27,6 +27,28 @@
             }
         }
 
+        public function GetById($id)
+        {
+            try
+            {
+                $query = "SELECT * FROM ".$this->tableName . "WHERE petTypeId = " . $id . ";";
+                $this->connection = Connection::GetInstance();
+                $result = $this->connection->Execute($query);
+                $petType = new PetType();
+                foreach ($result as $row)
+                {                
+                    $petType = new PetType();
+                    $petType->setId($row["petTypeId"]);
+                    $petType->setSize($row["size"]);
+                }
+                return $petType;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
         public function GetAll()
         {
             try

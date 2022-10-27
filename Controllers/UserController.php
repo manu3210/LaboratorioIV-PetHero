@@ -5,11 +5,15 @@
     use DAO\KeeperDao as KeeperDao;
     use DAO\PetTypeDao as PetTypeDao;
     use Exception;
+    use \Datetime;
+    use DateInterval;
+    use Dateperiod;
     use Models\Owner as Owner;
     use Models\Keeper as Keeper;
     use Models\Pet as Pet;
     use Models\PetType as PetType;
     use Models\User as User;
+    use Models\Day as Day;
 
     class UserController
     {
@@ -183,6 +187,19 @@
             $keeper->setPrice($price);
             $keeper->setPetSize($size);
 
+            $dateArray = $this->getRangeDate($availabilityFrom, $availabilityTo, 'Y-m-d');
+            $days = array();
+
+            foreach($dateArray as $date)
+            {
+                $day = new Day();
+                $day->setDateString($date);
+                $day->setIsAvailable(true);
+                $day->setKeeperId($_SESSION["user"]->getId());
+                array_push($days, $day);
+            }
+
+            $keeper->setDays($days);
             $this->keeperDao->EditAvailability($keeper);
             header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
         }
@@ -218,6 +235,23 @@
         {
             session_destroy();
             header("location:" .FRONT_ROOT . "Home/Index");
+        }
+
+        private function getRangeDate($date_ini, $date_end, $format) {
+
+            $dt_ini = DateTime::createFromFormat($format, $date_ini);
+            $dt_end = DateTime::createFromFormat($format, $date_end);
+            $period = new DatePeriod(
+                $dt_ini,
+                new DateInterval('P1D'),
+                $dt_end,
+            );
+            $range = [];
+            foreach ($period as $date) {
+                $range[] = $date->format($format);
+            }
+            $range[] = $date_end;
+            return $range;
         }
     }
 ?>

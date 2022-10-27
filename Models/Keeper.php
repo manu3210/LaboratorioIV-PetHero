@@ -8,6 +8,7 @@
         private $availabilityTo;
         private $petSize;
         private $price;
+        private $days;
 
         public function getAvailabilityFrom()
         {
@@ -49,6 +50,17 @@
         public function setPrice($price)
         {
             $this->price = $price;
+            return $this;
+        }
+
+        public function getDays()
+        {
+            return $this->days;
+        }
+
+        public function setDays($days)
+        {
+            $this->days = $days;
             return $this;
         }
 

@@ -36,7 +36,7 @@
                                              <td><?php echo $keeper->getPrice(); ?></td>
                                              <td><?php echo $keeper->getAvailabilityFrom(); ?></td>
                                              <td><?php echo $keeper->getAvailabilityTo(); ?></td>
-                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>#<?php echo $keeper->getId(); ?>"><i class="fas fa-business-time"></i></a></td>
+                                             <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>Booking/ShowAddBooking?keeperId=<?php echo $keeper->getId(); ?>&from=<?php echo $from; ?>&to=<?php echo $to;?>&petId=<?php echo $petId; ?>"><i class="fas fa-business-time"></i></a></td>
                                         </tr>
                                    <?php
                               }}

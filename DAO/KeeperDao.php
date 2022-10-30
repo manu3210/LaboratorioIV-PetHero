@@ -191,6 +191,28 @@
             }
         }
 
+        public function UpdateDays($keeperDays)
+        {
+            try
+            {
+                foreach($keeperDays as $day)
+                {
+                    $query  = "UPDATE days"
+                    . " SET isAvailable='" . $day->getIsAvailable() 
+                    ."' where keeperId = " . $day->getKeeperId()
+                    ." AND dayId = " . $day->getdId();
+                    
+                    $this->connection  = Connection::GetInstance();
+                    $this->connection->ExecuteNonQuery($query);
+                }
+                
+            }
+            catch(Exception $e)
+            {
+                throw $e;
+            }
+        }
+
         private function GetKeepersDays($id)
         {
             try

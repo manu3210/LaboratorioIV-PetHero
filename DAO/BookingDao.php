@@ -15,7 +15,7 @@
         {
             try
             {
-                $query  = "INSERT INTO " . $this->tableName . "(dateFrom, dateTo, petId, ownerId, keeperId, price, isConfirmed, isHalfPaid ) VALUES (:dateFrom, :dateTo, :petId, :ownerId, :keeperId, :price, :isConfirmed, :isHalfPaid);";
+                $query  = "INSERT INTO " . $this->tableName . "(dateFrom, dateTo, petId, ownerId, keeperId, price, isConfirmed, isTotalPaid ) VALUES (:dateFrom, :dateTo, :petId, :ownerId, :keeperId, :price, :isConfirmed, :isTotalPaid);";
                 $parameters["dateFrom"] = $booking->getDateFrom();
                 $parameters["dateTo"] = $booking->getDateTo();
                 $parameters["petId"] = $booking->getPet()->getId();
@@ -23,7 +23,7 @@
                 $parameters["keeperId"] = $booking->getKeeper()->getId();
                 $parameters["price"] = $booking->getPrice();
                 $parameters["isConfirmed"] = $booking->getIsConfirmed();
-                $parameters["isHalfPaid"] = $booking->getIsPaid() == false ? 0 : 1;
+                $parameters["isTotalPaid"] = $booking->getIsPaid() == false ? 0 : 1;
                 
                 $this->connection  = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query, $parameters);
@@ -53,7 +53,7 @@
                     $booking->setId($row["bookingId"]);
                     $booking->setDateFrom($row["dateFrom"]);
                     $booking->setDateTo($row["dateTo"]);
-                    $value = ($row["isConfirmed"] == 1) ? "Confirmada" : "Pendiente";
+                    $value = ($row["isConfirmed"] == true) ? "Confirmada" : "Pendiente";
                     $booking->setIsConfirmed($value);
                     $booking->setIsPaid($row["isTotalPaid"]);
                     $booking->setPrice($row["price"]);
@@ -110,7 +110,7 @@
                     $booking->setId($row["bookingId"]);
                     $booking->setDateFrom($row["dateFrom"]);
                     $booking->setDateTo($row["dateTo"]);
-                    $value = ($row["isConfirmed"] == 1) ? "Confirmada" : "Pendiente";
+                    $value = ($row["isConfirmed"] == true) ? "Confirmada" : "Pendiente";
                     $booking->setIsConfirmed($value);
                     $booking->setIsPaid($row["isTotalPaid"]);
                     $booking->setPrice($row["price"]);
@@ -150,8 +150,8 @@
             try
             {
                 $bookingList = array();
-                $query = "SELECT b.bookingId, b.dateFrom, b.dateTo, b.price, b.isConfirmed, b.isHalfPaid, b.isTotalPaid, p.petName, p.breed, p.petId, o.firstName, o.lastName, o.phone, o.email, k.firstName, k.lastName, k.phone, k.adress, k.email FROM "
-                .$this->tableName 
+                $query = "SELECT b.bookingId, b.dateFrom, b.dateTo, b.price, b.isConfirmed, b.isHalfPaid, b.isTotalPaid, p.petName, p.breed, p.petId, o.firstName, o.lastName, o.phone, o.email, k.firstName as kFirstName, k.lastName as kLastName, k.phone as kPhone, k.adress, k.email as kEmail FROM "
+                . $this->tableName . " b"
                 ." JOIN pets p ON p.petId = b.petId"
                 ." JOIN owners o ON o.ownerId = b.ownerId"
                 ." JOIN keepers k ON k.keeperId = b.keeperId"
@@ -165,8 +165,9 @@
                     $booking->setId($row["bookingId"]);
                     $booking->setDateFrom($row["dateFrom"]);
                     $booking->setDateTo($row["dateTo"]);
-                    $booking->setIsConfirmed($row["isConfirmed"]);
-                    $booking->setIsPaid($row["isPaid"]);
+                    $value = ($row["isConfirmed"] == true) ? "Confirmada" : "Pendiente";
+                    $booking->setIsConfirmed($value);
+                    $booking->setIsPaid($row["isTotalPaid"]);
                     $booking->setPrice($row["price"]);
 
                     $pet = new Pet();
@@ -176,17 +177,17 @@
                     $booking->setPet($pet);
 
                     $owner = new Owner();
-                    $owner->setFirstName($row["o.firstName"]);
-                    $owner->setLastName($row["o.lastName"]);
-                    $owner->setPhone($row["o.phone"]);
-                    $owner->setEmail($row["o.email"]);
+                    $owner->setFirstName($row["firstName"]);
+                    $owner->setLastName($row["lastName"]);
+                    $owner->setPhone($row["phone"]);
+                    $owner->setEmail($row["email"]);
                     $booking->setOwner($owner);
 
                     $keeper = new Keeper();
-                    $keeper->setFirstName($row["k.firstName"]);
-                    $keeper->setLastName($row["k.lastName"]);
-                    $keeper->setPhone($row["k.phone"]);
-                    $keeper->setEmail($row["k.email"]);
+                    $keeper->setFirstName($row["kFirstName"]);
+                    $keeper->setLastName($row["kLastName"]);
+                    $keeper->setPhone($row["kPhone"]);
+                    $keeper->setEmail($row["kEmail"]);
                     $booking->setKeeper($keeper);
 
                     array_push($bookingList, $booking);
@@ -196,6 +197,24 @@
             catch(Exception $ex)
             {
                 throw $ex;
+            }
+        }
+
+        public function UpdateConfirmation($booking)
+        {
+            try
+            {
+                $query  = "UPDATE " . $this->tableName 
+                . " SET isConfirmed='" . $booking->getIsConfirmed() 
+                . "', isTotalPaid = '" . $booking->getisPaid() 
+                ."' where bookingId = " . $booking->getId() . ";";
+                
+                $this->connection  = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $e)
+            {
+                throw $e;
             }
         }
 

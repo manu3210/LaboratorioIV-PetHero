@@ -12,7 +12,7 @@
         
         public function getdId()
         {
-            return $this->price;
+            return $this->id;
         }
 
         public function setId($id)

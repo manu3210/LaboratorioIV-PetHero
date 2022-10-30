@@ -180,27 +180,45 @@
 
         public function EditAvailability($id, $availabilityFrom, $availabilityTo, $price, $size)
         {
-            $keeper = new Keeper();
-            $keeper->setId($id);
-            $keeper->setAvailabilityFrom($availabilityFrom);
-            $keeper->setAvailabilityTo($availabilityTo);
-            $keeper->setPrice($price);
-            $keeper->setPetSize($size);
+            $toUpdate = $this->keeperDao->GetById($id);
+            $flag = true;
 
-            $dateArray = $this->getRangeDate($availabilityFrom, $availabilityTo, 'Y-m-d');
-            $days = array();
-
-            foreach($dateArray as $date)
+            foreach($toUpdate->getDays() as $day)
             {
-                $day = new Day();
-                $day->setDateString($date);
-                $day->setIsAvailable(true);
-                $day->setKeeperId($_SESSION["user"]->getId());
-                array_push($days, $day);
+                if($day->getIsAvailable() == false)
+                {
+                    $flag = false;
+                    break;
+                }
             }
 
-            $keeper->setDays($days);
-            $this->keeperDao->EditAvailability($keeper);
+            if($flag == true)
+            {
+                $keeper = new Keeper();
+                $keeper->setId($id);
+                $keeper->setAvailabilityFrom($availabilityFrom);
+                $keeper->setAvailabilityTo($availabilityTo);
+                $keeper->setPrice($price);
+                $keeper->setPetSize($size);
+    
+                $dateArray = $this->getRangeDate($availabilityFrom, $availabilityTo, 'Y-m-d');
+                $days = array();
+    
+                foreach($dateArray as $date)
+                {
+                    $day = new Day();
+                    $day->setDateString($date);
+                    $day->setIsAvailable(true);
+                    $day->setKeeperId($_SESSION["user"]->getId());
+                    array_push($days, $day);
+                }
+    
+                $keeper->setDays($days);
+                $this->keeperDao->EditAvailability($keeper);
+            }
+
+            $_SESSION["paramError"] = "No se pueden modificar los parametros ya que hay reservas activas";
+
             header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
         }
 

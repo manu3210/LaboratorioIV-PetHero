@@ -128,6 +128,7 @@
                 $index++;
             }
 
+            $index = 0;
             foreach($keeperList as $keeper)
             {
                 foreach($ownerDays as $day)
@@ -136,13 +137,58 @@
                     {
                         if($keeperDay->getDateString() == $day && $keeperDay->getIsAvailable() != 1)
                         {
-                            unset($keeperList[$keeper]);
+                            unset($keeperList[$index]);
                         }
+                    }
+                }
+                $index++;
+            }
+
+            require_once(VIEWS_PATH."KeeperList.php");
+        }
+
+        public function ConfirmBooking($id)
+        {
+            $booking = $this->bookingDao->GetById($id);
+            $keeperId =  $_SESSION["user"]->getId();
+            $keeper = $this->keeperDao->GetById($keeperId);
+            $keeperDays = $keeper->getDays();
+
+            $bookingDays = $this->getRangeDate($booking->getDateFrom(), $booking->getDateTo(), 'Y-m-d');
+
+            foreach($bookingDays as $bDay)
+            {
+                foreach($keeperDays as $kDay)
+                {
+                    if($bDay == $kDay->getDateString())
+                    {
+                        $kDay->setIsAvailable(0);
                     }
                 }
             }
 
-            require_once(VIEWS_PATH."KeeperList.php");
+            foreach($keeperDays as $day)
+            {
+                if($day->getIsAvailable() == 1)
+                    {
+                        $day->setIsAvailable(1);
+                    }
+            }
+            
+
+            $this->keeperDao->UpdateDays($keeperDays);
+
+            $booking->setIsConfirmed(true);
+            $this->bookingDao->UpdateConfirmation($booking);
+            $this->ShowBookingDetails($id);
+        }
+
+        public function PayBooking($id)
+        {
+            $booking = $this->bookingDao->GetById($id);
+            $booking->setIsPaid(true);
+            $this->bookingDao->UpdateConfirmation($booking);
+            $this->ShowBookingDetails($id);
         }
 
         private function getRangeDate($date_ini, $date_end, $format) {

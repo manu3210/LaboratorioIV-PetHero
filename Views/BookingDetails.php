@@ -1,4 +1,5 @@
 <?php
+    require_once('nav.php');
 ?>
 
 <style> 
@@ -66,15 +67,31 @@
                <div class="d-grid gap-2 d-md-flex justify-content-md-end d-inline" >
                     <a href="<?php echo FRONT_ROOT ?>Booking/ShowBookingList/"class="btn btn-primary me-md-2" type="button">Volver</a>
                     <?php 
-                         if($booking->getIsConfirmed() == "Confirmado")
-                         { ?>
-                              <a href="<?php echo FRONT_ROOT ?>Booking/ShowBookingList/"class="btn btn-primary me-md-2" type="button">Pagar</a>
-                    <?php } ?>
-                    <?php 
-                         if($booking->getIsConfirmed() == "Pendiente")
-                         { ?>
-                              <a href="<?php echo FRONT_ROOT ?>Booking/ShowBookingList/"class="btn btn-secondary me-md-2 disabled" disabled="true" type="button">Pagar</a>
-                    <?php } ?>
+                         if(get_class($_SESSION["user"]) == "Models\Owner")
+                         {
+                              if($booking->getIsConfirmed() == "Confirmada" && $booking->getisPaid() == false)
+                              { ?>
+                                   <a href="<?php echo FRONT_ROOT ?>Booking/PayBooking/<?php echo $booking->getId(); ?>"class="btn btn-primary me-md-2" type="button">Pagar</a>
+                         <?php } ?>
+                         <?php 
+                              if($booking->getIsConfirmed() == "Pendiente" || $booking->getisPaid() == true )
+                              { ?>
+                                   <a href="<?php echo FRONT_ROOT ?>Booking/ShowBookingList/"class="btn btn-secondary me-md-2 disabled" type="button">Pagar</a>
+                         <?php }
+                         }
+                         else
+                         {
+                              if($booking->getIsConfirmed() == "Confirmada")
+                              { ?>
+                                   <a href="<?php echo FRONT_ROOT ?>Booking/ShowBookingList/"class="btn btn-secondary me-md-2 disabled"  type="button">Confirmar</a>
+                         <?php } ?>
+                         <?php 
+                              if($booking->getIsConfirmed() == "Pendiente")
+                              { ?>
+                                   <a href="<?php echo FRONT_ROOT ?>Booking/ConfirmBooking/<?php echo $booking->getId(); ?>"class="btn btn-primary me-md-2" type="button">Confirmar</a>
+                         <?php }
+                         }
+                         ?>
                </div>
           </div>
      </section>

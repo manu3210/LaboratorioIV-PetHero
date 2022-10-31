@@ -20,6 +20,7 @@
                          <th>Precio por dia</th>
                          <th>Disponible desde</th>
                          <th>Disponible hasta</th>
+                         <th>Puntaje</th>
                          <th>Reservar</th>
                     </thead>
                     <tbody>
@@ -36,6 +37,7 @@
                                              <td><?php echo $keeper->getPrice(); ?></td>
                                              <td><?php echo $keeper->getAvailabilityFrom(); ?></td>
                                              <td><?php echo $keeper->getAvailabilityTo(); ?></td>
+                                             <td><?php if ($keeper->getScore() != null) { echo $keeper->getScore(); } else { echo "puntuacion indefinida"; }?></td>
                                              <td style="text-align: center;"><a href="<?php echo FRONT_ROOT ?>Booking/ShowAddBooking?keeperId=<?php echo $keeper->getId(); ?>&from=<?php echo $from; ?>&to=<?php echo $to;?>&petId=<?php echo $petId; ?>"><i class="fas fa-business-time"></i></a></td>
                                         </tr>
                                    <?php

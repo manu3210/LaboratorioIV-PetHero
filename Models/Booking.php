@@ -13,6 +13,7 @@
         private $price;
         private $isConfirmed;
         private $isPaid;
+        private $review;
 
         public function getId()
         {
@@ -110,6 +111,17 @@
         public function setisPaid($isPaid)
         {
             $this->isPaid = $isPaid;
+            return $this;
+        }
+
+        public function getReview()
+        {
+            return $this->review;
+        }
+
+        public function setReview($review)
+        {
+            $this->review = $review;
             return $this;
         }
     }

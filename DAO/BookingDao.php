@@ -5,6 +5,7 @@
     use Models\Pet as Pet;
     use Models\Owner as Owner;
     use Models\Keeper as Keeper;
+    use Models\Review as Review;
 
     class BookingDao implements IBookingDao
     {
@@ -38,11 +39,12 @@
         {
             try
             {
-                $query = "SELECT b.bookingId, b.dateFrom, b.dateTo, b.price, b.isConfirmed, b.isHalfPaid, b.isTotalPaid, p.petName, p.breed, p.petId, p.urlPhoto, o.firstName, o.lastName, o.phone, o.email, k.firstName as kFirstName, k.lastName as kLastName, k.phone as kPhone, k.adress as kAdress, k.email as kEmail, k.price as kPrice FROM "
+                $query = "SELECT b.bookingId, b.dateFrom, b.dateTo, b.price, b.isConfirmed, b.isHalfPaid, b.isTotalPaid, b.reviewId, p.petName, p.breed, p.petId, p.urlPhoto, o.firstName, o.lastName, o.phone, o.email, k.keeperId as kId, k.firstName as kFirstName, k.lastName as kLastName, k.phone as kPhone, k.adress as kAdress, k.email as kEmail, k.price as kPrice FROM "
                 . $this->tableName . " b"
                 ." JOIN pets p ON p.petId = b.petId"
                 ." JOIN owners o ON o.ownerId = b.ownerId"
                 ." JOIN keepers k ON k.keeperId = b.keeperId"
+                ." LEFT JOIN reviews r ON r.reviewId = b.keeperId"
                 ." WHERE b.bookingId = " .$id . ";";
                 $this->connection = Connection::GetInstance();
                 $result = $this->connection->Execute($query);
@@ -73,6 +75,7 @@
                     $booking->setOwner($owner);
 
                     $keeper = new Keeper();
+                    $keeper->setId($row["kId"]);
                     $keeper->setFirstName($row["kFirstName"]);
                     $keeper->setLastName($row["kLastName"]);
                     $keeper->setPhone($row["kPhone"]);
@@ -81,6 +84,9 @@
                     $keeper->setPrice($row["kPrice"]);
                     $booking->setKeeper($keeper);
 
+                    $review = new Review();
+                    $review->setId($row["reviewId"]);
+                    $booking->setReview($review);
                 }
                 return $booking;
             }
@@ -207,6 +213,23 @@
                 $query  = "UPDATE " . $this->tableName 
                 . " SET isConfirmed='" . $booking->getIsConfirmed() 
                 . "', isTotalPaid = '" . $booking->getisPaid() 
+                ."' where bookingId = " . $booking->getId() . ";";
+                
+                $this->connection  = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $e)
+            {
+                throw $e;
+            }
+        }
+
+        public function SetReview($booking)
+        {
+            try
+            {
+                $query  = "UPDATE " . $this->tableName 
+                . " SET reviewId='" . $booking->getReview()->getId() 
                 ."' where bookingId = " . $booking->getId() . ";";
                 
                 $this->connection  = Connection::GetInstance();

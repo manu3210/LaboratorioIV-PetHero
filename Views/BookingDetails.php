@@ -23,6 +23,7 @@
                     <li class="list-group-item">Telefono: <?php echo $keeper->getPhone() ?></li>
                     <li class="list-group-item">Direccion: <?php echo $keeper->getAdress() ?></li>
                     <li class="list-group-item">Precio por dia: <?php echo $keeper->getPrice() ?></li>
+                    <li class="list-group-item"><a href="<?php echo FRONT_ROOT ?>Review/ShowReviewList/ <?php echo $keeper->getId(); ?>">Ver comentarios del Keeper</a> <?php if($booking->getReview()->getId() == null){ ?>| <a href="<?php echo FRONT_ROOT ?>Review/ShowAddReview/?keeperId=<?php echo $keeper->getId(); ?>&bookingId=<?php echo $booking->getId(); ?>">Escribir comentarios</a> <?php } ?></li>
                     </ul>
                </div>
                <br>

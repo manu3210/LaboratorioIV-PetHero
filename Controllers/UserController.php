@@ -222,33 +222,6 @@
             header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
         }
 
-        public function AddPet($name, $breed, $urlPhoto, $urlVideo, $urlVaccination, $type,  $details)
-        {
-            $user = $_SESSION["user"];
-
-            $pet = new Pet();
-            $pet->setName($name);
-            $pet->setType($type);
-            $pet->setUrlPhoto($urlPhoto);
-            $pet->setUrlVideo($urlVideo);
-            $pet->setUrlVaccination($urlVaccination);
-            $pet->setDetails($details);
-            $pet->setBreed($breed);
-
-            $arr = $user->getPets();
-            $last = end($arr);
-            $id = ($last != false) ? $last->getId() : 0;
-            $id++;
-            $pet->setId($id);
-            array_push($arr, $pet);
-            $user->setPets($arr);
-
-            $this->ownerDao->AddPet($user);
-            header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
-        }
-
-        
-
         public function Logout()
         {
             session_destroy();

@@ -111,7 +111,7 @@
             {
                 $keeperList = array();
 
-                $query = "SELECT k.keeperId, k.email, k.firstName, k.lastName, k.phone, k.adress, k.pass, k.availabilityFrom, k.availabilityTo, t.size, k.price FROM "
+                $query = "SELECT k.keeperId, k.email, k.firstName, k.lastName, k.phone, k.adress, k.pass, k.availabilityFrom, k.availabilityTo, k.score, t.size, k.price FROM "
                 .$this->tableName
                 ." k left join petTypes t on k.petTypeId = t.petTypeId";
 
@@ -133,6 +133,7 @@
                     $user->setAvailabilityTo($row["availabilityTo"]);
                     $user->setPetSize($row["size"]);
                     $user->setPrice($row["price"]);
+                    $user->setScore($row["score"]);
 
                     array_push($keeperList, $user);
                 }
@@ -156,7 +157,7 @@
             {
                 $keeperList = array();
 
-                $query = "SELECT k.keeperId, k.email, k.firstName, k.lastName, k.phone, k.adress, k.pass, k.availabilityFrom, k.availabilityTo, t.size, k.price FROM "
+                $query = "SELECT k.keeperId, k.email, k.firstName, k.lastName, k.phone, k.adress, k.pass, k.availabilityFrom, k.availabilityTo, k.score, t.size, k.price FROM "
                 .$this->tableName
                 ." k left join petTypes t on k.petTypeId = t.petTypeId"
                 ." WHERE keeperId = " . $id . ";";
@@ -179,6 +180,7 @@
                     $user->setAvailabilityTo($row["availabilityTo"]);
                     $user->setPetSize($row["size"]);
                     $user->setPrice($row["price"]);
+                    $user->setScore($row["score"]);
                 }
 
                 $user->setDays($this->GetKeepersDays($user->getId()));
@@ -243,6 +245,23 @@
             catch(Exception $ex)
             {
                 throw $ex;
+            }
+        }
+
+        public function SetScore($keeper)
+        {
+            try
+            {
+                $query  = "UPDATE " . $this->tableName 
+                . " SET score='" . $keeper->getScore() 
+                ."' where keeperId = " . $keeper->getId();
+                
+                $this->connection  = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $e)
+            {
+                throw $e;
             }
         }
 

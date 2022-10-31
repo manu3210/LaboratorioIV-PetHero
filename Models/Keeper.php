@@ -9,6 +9,7 @@
         private $petSize;
         private $price;
         private $days;
+        private $score;
 
         public function getAvailabilityFrom()
         {
@@ -61,6 +62,17 @@
         public function setDays($days)
         {
             $this->days = $days;
+            return $this;
+        }
+
+        public function getScore()
+        {
+            return $this->score;
+        }
+
+        public function setScore($score)
+        {
+            $this->score = $score;
             return $this;
         }
 

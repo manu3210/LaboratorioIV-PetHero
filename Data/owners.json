@@ -53,5 +53,16 @@
         "adress": "Rivadavia 7902",
         "pets": [],
         "isAdmin": false
+    },
+    {
+        "id": 4,
+        "email": "test@test.com",
+        "password": "3210",
+        "firstName": "Emanuel",
+        "lastName": "Rivas",
+        "phone": "4562683",
+        "adress": "Rivadavia 7902",
+        "pets": [],
+        "isAdmin": false
     }
 ]

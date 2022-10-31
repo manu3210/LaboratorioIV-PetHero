@@ -26,6 +26,7 @@
                         <a href="<?php echo FRONT_ROOT ?>User/ShowEditAvailability" class="card-link">Cambiar parametros</a>
                         <a href="<?php echo FRONT_ROOT ?>Booking/ShowBookingList" class="card-link">Mis reservas</a>
                         <a href="<?php echo FRONT_ROOT ?>User/ShowEditProfile" class="card-link">Editar perfil</a>
+                        <a href="<?php echo FRONT_ROOT ?>Review/ShowReviewList/<?php echo $user->getId(); ?>" class="card-link">Ver comentarios</a>
                     </div>
                 </div>
             </div>

@@ -34,7 +34,7 @@
                          </div>
                     </div>
                     <button type="submit" class="btn btn-primary ml-auto " >Confirmar</button>
-                    <a href="<?php echo FRONT_ROOT ?>User/ShowBookingList/"class="btn btn-primary me-md-2" type="button">Volver</a>
+                    <a href="<?php echo FRONT_ROOT ?>Booking/ShowBookingList/"class="btn btn-primary me-md-2" type="button">Volver</a>
                </form>
           </div>
      </section>

@@ -187,8 +187,9 @@
         {
             $booking = $this->bookingDao->GetById($id);
             $booking->setIsPaid(true);
+            $booking->setIsConfirmed("Pagada");
             $this->bookingDao->UpdateConfirmation($booking);
-            $this->ShowBookingDetails($id);
+            require_once(VIEWS_PATH."confirm.php");
         }
 
         private function getRangeDate($date_ini, $date_end, $format) {

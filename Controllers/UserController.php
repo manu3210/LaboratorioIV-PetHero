@@ -37,7 +37,7 @@
 
         public function ShowHome()
         {
-            require_once(VIEWS_PATH."presentation.php");
+            require_once(VIEWS_PATH."OwnerLogin.php");
         }
 
         public function ShowOwnerLogin()
@@ -139,6 +139,12 @@
                     header("location:" .FRONT_ROOT . "User/ShowOwnerHome");
                 }
             }
+
+            if(!isset($_SESSION["user"]))
+            {
+                $_SESSION["loginError"] = "El usuario y la contraseña no coinciden";
+                $this->ShowHome();
+            }
         }
 
         public function KeeperLogin ($email, $password)
@@ -152,6 +158,12 @@
                     $_SESSION["user"] = $user;
                     header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
                 }
+            }
+
+            if(!isset($_SESSION["user"]))
+            {
+                $_SESSION["loginError"] = "El usuario y la contraseña no coinciden";
+                $this->ShowHome();
             }
         }
 
@@ -188,6 +200,7 @@
                 if($day->getIsAvailable() == false)
                 {
                     $flag = false;
+                    $_SESSION["paramError"] = "No se pueden modificar los parametros ya que hay reservas activas";
                     break;
                 }
             }
@@ -217,7 +230,6 @@
                 $this->keeperDao->EditAvailability($keeper);
             }
 
-            $_SESSION["paramError"] = "No se pueden modificar los parametros ya que hay reservas activas";
 
             header("location:" .FRONT_ROOT . "User/ShowKeeperHome");
         }

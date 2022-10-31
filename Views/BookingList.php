@@ -42,8 +42,16 @@
                     </tbody>
                </table>
                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="<?php echo FRONT_ROOT ?>User/ShowOwnerHome/"class="btn btn-primary me-md-2" type="button">Volver</a>
-                    <a href="<?php echo FRONT_ROOT ?>Booking/ShowNewBooking"class="btn btn-primary me-md-2" type="button">Generar Reserva</a>
+                    <?php if(get_class($_SESSION["user"]) == "Models\Owner")
+                    { ?>
+                         <a href="<?php echo FRONT_ROOT ?>User/ShowOwnerHome/"class="btn btn-primary me-md-2" type="button">Volver</a>
+                         <a href="<?php echo FRONT_ROOT ?>Booking/ShowNewBooking"class="btn btn-primary me-md-2" type="button">Generar Reserva</a>
+                    <?php } 
+                    else
+                    {?>
+                         <a href="<?php echo FRONT_ROOT ?>User/ShowKeeperHome/"class="btn btn-primary me-md-2" type="button">Volver</a>
+                    <?php }
+                    require_once(VIEWS_PATH."BookingList.php");?>
                </div>
           </div>
      </section>

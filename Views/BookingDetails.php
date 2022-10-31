@@ -1,5 +1,30 @@
 <?php
-    require_once('nav.php');
+     error_reporting(0);
+     if(isset($_GET['payment_id']))
+     {
+          header("location:" .FRONT_ROOT . "Booking/PayBooking" . $booking->getId());
+     }
+     require_once('nav.php');
+     require_once 'vendor/autoload.php';
+     MercadoPago\SDK::setAccessToken('TEST-3389983883488298-041413-f52c7c3586029b5c5bc9bc33d8ab8532-14666069');
+     $preference = new MercadoPago\Preference();
+     
+     $item = new MercadoPago\Item();
+     $item->title = "Reserva keeper";
+     $item->quantity = 1;
+     $item->unit_price = $booking->getPrice() / 2;
+     $item->currency_id = "ARS";
+     $item->id = $booking->getId();
+     
+     $preference->items = array($item);
+     
+     $preference->back_urls = array(
+          "success" => "http://localhost/LaboratorioIV-PetHero/Booking/PayBooking/?id=" . $item->id,
+     );
+     
+     $preference->auto_return = "approved";
+     //$preference->binary_mode = "true";
+     $preference->save();
 ?>
 
 <style> 
@@ -8,6 +33,29 @@
     pointer-events: none;
 }
 </style>
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+
+<?php if($booking->getIsPaid() == false && $booking->getIsConfirmed() == "Confirmada")
+{ ?>
+     <script>
+     const mp = new MercadoPago('TEST-1efc4489-e74c-4bac-ad21-e8b192c427e5', {
+          locale: 'es-AR'
+     });
+
+     mp.checkout({
+          preference:{
+               id: '<?php echo $preference->id; ?>'
+          },
+          render: {
+               container: '.checkout-btn',
+               label: 'Pagar'
+          }
+     })
+     </script>
+<?php } ?>
+
+
+
 
 <main class="py-5">
      <section id="listado" class="mb-5">
@@ -69,17 +117,9 @@
                     <a href="<?php echo FRONT_ROOT ?>Booking/ShowBookingList/"class="btn btn-primary me-md-2" type="button">Volver</a>
                     <?php 
                          if(get_class($_SESSION["user"]) == "Models\Owner")
-                         {
-                              if($booking->getIsConfirmed() == "Confirmada" && $booking->getisPaid() == false)
-                              { ?>
-                                   <a href="<?php echo FRONT_ROOT ?>Booking/PayBooking/<?php echo $booking->getId(); ?>"class="btn btn-primary me-md-2" type="button">Pagar</a>
-                         <?php } ?>
-                         <?php 
-                              if($booking->getIsConfirmed() == "Pendiente" || $booking->getisPaid() == true )
-                              { ?>
-                                   <a href="<?php echo FRONT_ROOT ?>Booking/ShowBookingList/"class="btn btn-secondary me-md-2 disabled" type="button">Pagar</a>
-                         <?php }
-                         }
+                         { ?>
+                              <div class="checkout-btn"></div>
+                         <?php } 
                          else
                          {
                               if($booking->getIsConfirmed() == "Confirmada")

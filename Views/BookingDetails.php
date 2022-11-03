@@ -23,7 +23,6 @@
      );
      
      $preference->auto_return = "approved";
-     //$preference->binary_mode = "true";
      $preference->save();
 ?>
 
@@ -129,7 +128,8 @@
                          <?php 
                               if($booking->getIsConfirmed() == "Pendiente")
                               { ?>
-                                   <a href="<?php echo FRONT_ROOT ?>Booking/ConfirmBooking/<?php echo $booking->getId(); ?>"class="btn btn-primary me-md-2" type="button">Confirmar</a>
+                                   <a href="<?php echo FRONT_ROOT ?>Booking/DeclineBooking/<?php echo $booking->getId(); ?>"class="btn btn-danger me-md-2" type="button">Rechazar</a>
+                                   <a href="<?php echo FRONT_ROOT ?>Booking/ConfirmBooking/<?php echo $booking->getId(); ?>"class="btn btn-success me-md-2" type="button">Confirmar</a>
                          <?php }
                          }
                          ?>

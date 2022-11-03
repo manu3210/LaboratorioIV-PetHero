@@ -55,7 +55,7 @@
                     $booking->setId($row["bookingId"]);
                     $booking->setDateFrom($row["dateFrom"]);
                     $booking->setDateTo($row["dateTo"]);
-                    $value = ($row["isConfirmed"] == true) ? "Confirmada" : "Pendiente";
+                    $value = ($row["isConfirmed"]);
                     $booking->setIsConfirmed($value);
                     $booking->setIsPaid($row["isTotalPaid"]);
                     $booking->setPrice($row["price"]);
@@ -171,7 +171,7 @@
                     $booking->setId($row["bookingId"]);
                     $booking->setDateFrom($row["dateFrom"]);
                     $booking->setDateTo($row["dateTo"]);
-                    $value = ($row["isConfirmed"] == true) ? "Confirmada" : "Pendiente";
+                    $value = ($row["isConfirmed"]);
                     $booking->setIsConfirmed($value);
                     $booking->setIsPaid($row["isTotalPaid"]);
                     $booking->setPrice($row["price"]);

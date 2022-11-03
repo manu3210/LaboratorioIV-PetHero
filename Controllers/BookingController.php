@@ -86,6 +86,7 @@
         public function AddBooking()
         {
             $booking =  $_SESSION["booking"];
+            $booking->setIsConfirmed("Pendiente");
             $this->bookingDao->Add($booking);
             header("location:" .FRONT_ROOT . "Booking/ShowBookingList");
         }
@@ -179,6 +180,14 @@
             $this->keeperDao->UpdateDays($keeperDays);
 
             $booking->setIsConfirmed(true);
+            $this->bookingDao->UpdateConfirmation($booking);
+            $this->ShowBookingDetails($id);
+        }
+
+        public function DeclineBooking($id)
+        {
+            $booking = $this->bookingDao->GetById($id);
+            $booking->setIsConfirmed("Rechazada");
             $this->bookingDao->UpdateConfirmation($booking);
             $this->ShowBookingDetails($id);
         }

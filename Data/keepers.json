@@ -24,5 +24,18 @@
         "availabilityTo": null,
         "petSize": null,
         "price": null
+    },
+    {
+        "id": 3,
+        "email": "keeper@test",
+        "password": "3210",
+        "firstName": "Emanuel",
+        "lastName": "Rivas",
+        "phone": "4562683",
+        "adress": "Rivadavia 7902",
+        "availabilityFrom": null,
+        "availabilityTo": null,
+        "petSize": null,
+        "price": null
     }
 ]

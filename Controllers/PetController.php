@@ -2,6 +2,7 @@
     namespace Controllers;
     use Models\Pet as Pet;
     use DAO\PetDAO as PetDao;
+    use DAO\PetJsonDAO as PetJsonDAO;
     use DAO\PetTypeDAO as PetTypeDAO;
     
     class PetController

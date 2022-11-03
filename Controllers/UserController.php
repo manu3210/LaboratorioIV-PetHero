@@ -4,6 +4,8 @@
     use DAO\OwnerDAO as OwnerDAO;
     use DAO\KeeperDao as KeeperDao;
     use DAO\PetTypeDao as PetTypeDao;
+    use DAO\OwnerJsonDao as OwnerJsonDao;
+    use DAO\KeeperJsonDao as KeeperJsonDao;
     use Exception;
     use \Datetime;
     use DateInterval;

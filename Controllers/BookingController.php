@@ -179,7 +179,7 @@
 
             $this->keeperDao->UpdateDays($keeperDays);
 
-            $booking->setIsConfirmed(true);
+            $booking->setIsConfirmed("Confirmada");
             $this->bookingDao->UpdateConfirmation($booking);
             $this->ShowBookingDetails($id);
         }
